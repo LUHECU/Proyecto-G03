@@ -1,0 +1,16 @@
+﻿/* Estilo común para encabezados centrados y en negrita */
+.header-center {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Estilo común para datos centrados */
+.data-center {
+    text-align: center;
+}
+
+/* Estilo para encabezado de columna alineado a la izquierda y en negrita */
+.header-left {
+    text-align: left;
+    font-weight: bold;
+}

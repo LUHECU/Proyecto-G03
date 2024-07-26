@@ -9,18 +9,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 using LinqToDB;
+using LinqToDB.Common;
 using LinqToDB.Configuration;
+using LinqToDB.Data;
 using LinqToDB.Mapping;
 
 namespace DataModels
 {
 	/// <summary>
 	/// Database       : PV_ProyectoFinal
-	/// Data Source    : LAPTOP-57J4RFLP\SQLEXPRESS
-	/// Server Version : 14.00.1000
+	/// Data Source    : LAPTOP-TKFN345G\SQLEXPRESS
+	/// Server Version : 14.00.2056
 	/// </summary>
 	public partial class PvProyectoFinalDB : LinqToDB.Data.DataConnection
 	{
@@ -198,6 +201,139 @@ namespace DataModels
 		/// </summary>
 		[Association(ThisKey="IdPersona", OtherKey="IdPersona", CanBeNull=false)]
 		public Persona Persona { get; set; }
+
+		#endregion
+	}
+
+	public static partial class PvProyectoFinalDBStoredProcedures
+	{
+		#region ConsultarHabitacionesPorID
+
+		public static IEnumerable<Habitacion> ConsultarHabitacionesPorID(this PvProyectoFinalDB dataConnection, int? @idHabitaciones)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitaciones", @idHabitaciones, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<Habitacion>("[dbo].[ConsultarHabitacionesPorID]", parameters);
+		}
+
+		#endregion
+
+		#region SpConsultarHabitaciones
+
+		public static IEnumerable<SpConsultarHabitacionesResult> SpConsultarHabitaciones(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<SpConsultarHabitacionesResult>("[dbo].[SpConsultarHabitaciones]");
+		}
+
+		public partial class SpConsultarHabitacionesResult
+		{
+			[Column("idHabitacion")    ] public int    IdHabitacion     { get; set; }
+			[Column("nombre")          ] public string Nombre           { get; set; }
+			[Column("numeroHabitacion")] public string NumeroHabitacion { get; set; }
+			[Column("capacidadMaxima") ] public int    CapacidadMaxima  { get; set; }
+			[Column("descripcion")     ] public string Descripcion      { get; set; }
+			[Column("estado")          ] public char   Estado           { get; set; }
+			[Column("idHotel")         ] public int    IdHotel          { get; set; }
+		}
+
+		#endregion
+
+		#region SpConsultarHoteles
+
+		public static IEnumerable<Hotel> SpConsultarHoteles(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<Hotel>("[dbo].[SpConsultarHoteles]");
+		}
+
+		#endregion
+
+		#region SpConsultarPersonas
+
+		public static IEnumerable<Persona> SpConsultarPersonas(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<Persona>("[dbo].[SpConsultarPersonas]");
+		}
+
+		#endregion
+
+		#region SpCosultarReservaciones
+
+		public static IEnumerable<Reservacion> SpCosultarReservaciones(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<Reservacion>("[dbo].[SpCosultarReservaciones]");
+		}
+
+		#endregion
+
+		#region SpCrearHabitacion
+
+		public static int SpCrearHabitacion(this PvProyectoFinalDB dataConnection, string @NumeroHabitacion, int? @CapacidadMaxima, string @Descripcion, char? @Estado, int? @IdHotel)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@NumeroHabitacion", @NumeroHabitacion, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@CapacidadMaxima",  @CapacidadMaxima,  LinqToDB.DataType.Int32),
+				new DataParameter("@Descripcion",      @Descripcion,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@Estado",           @Estado,           LinqToDB.DataType.VarChar)
+				{
+					Size = 1
+				},
+				new DataParameter("@IdHotel",          @IdHotel,          LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[SpCrearHabitacion]", parameters);
+		}
+
+		#endregion
+
+		#region SpEditarHabitacion
+
+		public static int SpEditarHabitacion(this PvProyectoFinalDB dataConnection, int? @idHabitacion, int? @idHotel, string @numeroHabitacion, int? @capacidadMaxima, string @descripcion, string @Estado)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitacion",     @idHabitacion,     LinqToDB.DataType.Int32),
+				new DataParameter("@idHotel",          @idHotel,          LinqToDB.DataType.Int32),
+				new DataParameter("@numeroHabitacion", @numeroHabitacion, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@capacidadMaxima",  @capacidadMaxima,  LinqToDB.DataType.Int32),
+				new DataParameter("@descripcion",      @descripcion,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@Estado",           @Estado,           LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[spEditarHabitacion]", parameters);
+		}
+
+		#endregion
+
+		#region SpEliminarHabitaciones
+
+		public static int SpEliminarHabitaciones(this PvProyectoFinalDB dataConnection, int? @idHabitacion)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitacion", @idHabitacion, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[SpEliminarHabitaciones]", parameters);
+		}
 
 		#endregion
 	}
