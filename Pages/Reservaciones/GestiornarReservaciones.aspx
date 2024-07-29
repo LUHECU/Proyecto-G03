@@ -9,6 +9,7 @@
 
         <div class="row">
 
+
             <div class="col col-sm-6 col-md-4 col-lg-2">
                 <div class="mb-2">
                     <asp:Label ID="lblCliente" runat="server" Text="Cliente"></asp:Label>
