@@ -11,10 +11,10 @@
 
             <div class="col col-sm-6 col-md-4 col-lg-2">
                 <div class="mb-2">
-                    <asp:Label ID="lblCliente" runat="server" Text="Cliente"></asp:Label>
+                    <asp:Label ID="lblPersona" runat="server" Text="Cliente"></asp:Label>
                 </div>
                 <div>
-                    <asp:DropDownList ID="ddlCliente" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlPersona" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
             </div>
 
@@ -23,7 +23,8 @@
                     <asp:Label ID="lblFechaEntrada" runat="server" Text="Fecha entrada"></asp:Label>
                 </div>
                 <div>
-                    <asp:TextBox ID="txtFechaEntrada" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:RangeValidator ID="rvFechaEntrada" runat="server" ErrorMessage="Fecha requerida" ControlToValidate="txtEntrada"></asp:RangeValidator>
                 </div>
             </div>
 
@@ -32,28 +33,50 @@
                     <asp:Label ID="lblFechaSalida" runat="server" Text="Fecha salida"></asp:Label>
                 </div>
                 <div>
-                    <asp:TextBox ID="txtFechaSalida" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:RangeValidator ID="rvFechaSalida" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaSalida"></asp:RangeValidator>
                 </div>
             </div>
 
-           <div class="col col-sm-6 col-md-4 col-lg-2">
-               <div class="mb-3">
-                    <asp:Label ID="lbl" runat="server" Text="" Visible="false"></asp:Label>
-                </div>
+           <div class="mt-2 col col-sm-6 col-md-4 col-lg-2">
                 <div class="mt-4">
-                    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" CssClass="btn btn-info text text-light"/>
+                    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" CssClass="btn btn-primary" OnClick="btnFiltrar_Click"/>
                 </div>
             </div>
+
+            <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" ValidateEmptyText="true" OnServerValidate="cvFechaSalida_ServerValidate"></asp:CustomValidator>
+
         </div>
    
         <div class="m mt-4">
-            <a href="CrearReservacion.aspx" class="btn btn-info text text-light">Nueva Resevación</a>
+            <a href="CrearReservacion.aspx" class="btn btn-primary">Nueva Resevación</a>
         </div>
 
-        <div>
-            <asp:GridView ID="grdGestionarReserv" runat="server">
+        <div class="mt-3">
+            <asp:GridView ID="grdGestReserv" runat="server" AutoGenerateColumns="false" CssClass="border-1" CellPadding="10">
                 <Columns>
-                    <asp:BoundField DataField=""/>
+                    <asp:BoundField DataField="idReservacion" HeaderText="# reservación" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center"/>
+                    <asp:BoundField DataField="cliente" HeaderText="Cliente" ItemStyle-CssClass="w-auto"/>
+                    <asp:BoundField DataField="nombreHotel" HeaderText="Hotel" ItemStyle-CssClass="w-auto"/>
+                    <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada" ItemStyle-CssClass="w-auto" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" ItemStyle-CssClass="w-auto" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" HeaderText="Costo">
+                        <ItemTemplate>
+                            $<%# Decimal.Parse(Eval("costoTotal").ToString())%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" HeaderText="Estado">
+                        <ItemTemplate>
+                            <%# estadoReservacion(DateTime.Parse(Eval("FechaEntrada").ToString()), DateTime.Parse(Eval("fechaSalida").ToString()), Eval("estado").ToString())%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" >
+                        <ItemTemplate>
+                            <a href="Detalle.aspx?id=<%#Eval("idReservacion")%>" class="btn btn-light btn-outline-secondary">Consultar</a>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+
                 </Columns>
             </asp:GridView>
         </div>

@@ -7,6 +7,12 @@
             <h2>Detalle de Reservación</h2>
         </div>
 
+
+        <asp:GridView ID="GridView1" runat="server">
+
+        </asp:GridView>
+
+
         <div class="row">
 
             <div class="col col-sm-6 col-md-4 col-lg-2">

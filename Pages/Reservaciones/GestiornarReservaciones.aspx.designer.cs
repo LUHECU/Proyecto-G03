@@ -15,22 +15,22 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
     {
 
         /// <summary>
-        /// Control lblCliente.
+        /// Control lblPersona.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCliente;
+        protected global::System.Web.UI.WebControls.Label lblPersona;
 
         /// <summary>
-        /// Control ddlCliente.
+        /// Control ddlPersona.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPersona;
 
         /// <summary>
         /// Control lblFechaEntrada.
@@ -51,6 +51,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtFechaEntrada;
 
         /// <summary>
+        /// Control rvFechaEntrada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvFechaEntrada;
+
+        /// <summary>
         /// Control lblFechaSalida.
         /// </summary>
         /// <remarks>
@@ -69,13 +78,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtFechaSalida;
 
         /// <summary>
-        /// Control lbl.
+        /// Control rvFechaSalida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl;
+        protected global::System.Web.UI.WebControls.RangeValidator rvFechaSalida;
 
         /// <summary>
         /// Control btnFiltrar.
@@ -87,12 +96,21 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.Button btnFiltrar;
 
         /// <summary>
-        /// Control grdGestionarReserv.
+        /// Control cvFechaSalida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdGestionarReserv;
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaSalida;
+
+        /// <summary>
+        /// Control grdGestReserv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdGestReserv;
     }
 }
