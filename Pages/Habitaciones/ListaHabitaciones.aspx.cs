@@ -30,7 +30,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             }
             catch
             {
-                //Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                Response.Redirect("~/Pages/Mensajes/Error.aspx");
             }
 
         }

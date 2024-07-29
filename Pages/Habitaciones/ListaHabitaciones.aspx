@@ -17,6 +17,7 @@
             <asp:BoundField DataField="nombre" HeaderText="Hotel" HeaderStyle-CssClass="header-left" ItemStyle-CssClass="data-left"/>
             <asp:BoundField DataField="numeroHabitacion" HeaderText="Número Habitación" HeaderStyle-CssClass="header-center" ItemStyle-CssClass="data-center"/>
             <asp:BoundField DataField="capacidadMaxima" HeaderText="Capacidad Máxima"  HeaderStyle-CssClass="header-center" ItemStyle-CssClass="data-center"/>
+            <asp:BoundField DataField="idHotel" HeaderText="Id Hotel"  HeaderStyle-CssClass="header-center" ItemStyle-CssClass="data-center" Visible="false"/>
            
       
         <asp:TemplateField HeaderText="Estado">
@@ -33,7 +34,8 @@
         <asp:TemplateField>
         <ItemTemplate> 
          <!-- Enlace a la página EditarHabitacion.aspx, pasando el idHabitacion como parámetro en la URL -->
-        <a href="EditarHabitacion.aspx?id=<%# Eval("idHabitacion")%>" class="btn btn-primary">Editar</a>
+           <%--<a href="EditarHabitacion.aspx?id=<%# Eval("idHabitacion")%>" class="btn btn-primary">Editar</a>--%>
+           <a href='EditarHabitacion.aspx?id=<%# Eval("idHabitacion")%>&idHotel=<%# Eval("idHotel") %>' class='btn btn-primary'>Editar</a>
         </ItemTemplate> 
         </asp:TemplateField>
         </Columns>
