@@ -22,8 +22,8 @@ namespace DataModels
 {
 	/// <summary>
 	/// Database       : PV_ProyectoFinal
-	/// Data Source    : LAPTOP-TKFN345G\SQLEXPRESS
-	/// Server Version : 14.00.2056
+	/// Data Source    : LAPTOP-57J4RFLP\SQLEXPRESS
+	/// Server Version : 14.00.1000
 	/// </summary>
 	public partial class PvProyectoFinalDB : LinqToDB.Data.DataConnection
 	{
@@ -207,36 +207,29 @@ namespace DataModels
 
 	public static partial class PvProyectoFinalDBStoredProcedures
 	{
-		#region ConsultarHabitacionesPorID
+		#region SpConsultarBitacoras
 
-		public static IEnumerable<Habitacion> ConsultarHabitacionesPorID(this PvProyectoFinalDB dataConnection, int? @idHabitaciones)
+		public static IEnumerable<Bitacora> SpConsultarBitacoras(this PvProyectoFinalDB dataConnection)
 		{
-			var parameters = new []
-			{
-				new DataParameter("@idHabitaciones", @idHabitaciones, LinqToDB.DataType.Int32)
-			};
+			return dataConnection.QueryProc<Bitacora>("[dbo].[SpConsultarBitacoras]");
+		}
 
-			return dataConnection.QueryProc<Habitacion>("[dbo].[ConsultarHabitacionesPorID]", parameters);
+		#endregion
+
+		#region SpConsultarHabitacion
+
+		public static IEnumerable<Habitacion> SpConsultarHabitacion(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<Habitacion>("[dbo].[SpConsultarHabitacion]");
 		}
 
 		#endregion
 
 		#region SpConsultarHabitaciones
 
-		public static IEnumerable<SpConsultarHabitacionesResult> SpConsultarHabitaciones(this PvProyectoFinalDB dataConnection)
+		public static IEnumerable<Habitacion> SpConsultarHabitaciones(this PvProyectoFinalDB dataConnection)
 		{
-			return dataConnection.QueryProc<SpConsultarHabitacionesResult>("[dbo].[SpConsultarHabitaciones]");
-		}
-
-		public partial class SpConsultarHabitacionesResult
-		{
-			[Column("idHabitacion")    ] public int    IdHabitacion     { get; set; }
-			[Column("nombre")          ] public string Nombre           { get; set; }
-			[Column("numeroHabitacion")] public string NumeroHabitacion { get; set; }
-			[Column("capacidadMaxima") ] public int    CapacidadMaxima  { get; set; }
-			[Column("descripcion")     ] public string Descripcion      { get; set; }
-			[Column("estado")          ] public char   Estado           { get; set; }
-			[Column("idHotel")         ] public int    IdHotel          { get; set; }
+			return dataConnection.QueryProc<Habitacion>("[dbo].[SpConsultarHabitaciones]");
 		}
 
 		#endregion
@@ -261,78 +254,67 @@ namespace DataModels
 
 		#region SpCosultarReservaciones
 
-		public static IEnumerable<Reservacion> SpCosultarReservaciones(this PvProyectoFinalDB dataConnection)
+		public static IEnumerable<SpCosultarReservacionesResult> SpCosultarReservaciones(this PvProyectoFinalDB dataConnection)
 		{
-			return dataConnection.QueryProc<Reservacion>("[dbo].[SpCosultarReservaciones]");
+			return dataConnection.QueryProc<SpCosultarReservacionesResult>("[dbo].[SpCosultarReservaciones]");
+		}
+
+		public partial class SpCosultarReservacionesResult
+		{
+			[Column("idReservacion")       ] public int       IdReservacion        { get; set; }
+			[Column("idPersona")           ] public int       IdPersona            { get; set; }
+			[Column("cliente")             ] public string    Cliente              { get; set; }
+			[Column("idHabitacion")        ] public int       IdHabitacion         { get; set; }
+			[Column("numeroHabitacion")    ] public string    NumeroHabitacion     { get; set; }
+			[Column("nombreHotel")         ] public string    NombreHotel          { get; set; }
+			[Column("fechaEntrada")        ] public DateTime  FechaEntrada         { get; set; }
+			[Column("fechaSalida")         ] public DateTime  FechaSalida          { get; set; }
+			[Column("numeroAdultos")       ] public int       NumeroAdultos        { get; set; }
+			[Column("numeroNinhos")        ] public int       NumeroNinhos         { get; set; }
+			[Column("totalDiasReservacion")] public int       TotalDiasReservacion { get; set; }
+			[Column("costoPorCadaAdulto")  ] public decimal   CostoPorCadaAdulto   { get; set; }
+			[Column("costoPorCadaNinho")   ] public decimal   CostoPorCadaNinho    { get; set; }
+			[Column("costoTotal")          ] public decimal   CostoTotal           { get; set; }
+			[Column("fechaCreacion")       ] public DateTime  FechaCreacion        { get; set; }
+			[Column("fechaModificacion")   ] public DateTime? FechaModificacion    { get; set; }
+			[Column("estado")              ] public char      Estado               { get; set; }
 		}
 
 		#endregion
 
-		#region SpCrearHabitacion
+		#region SpFiltrarReservaciones
 
-		public static int SpCrearHabitacion(this PvProyectoFinalDB dataConnection, string @NumeroHabitacion, int? @CapacidadMaxima, string @Descripcion, char? @Estado, int? @IdHotel)
+		public static IEnumerable<SpFiltrarReservacionesResult> SpFiltrarReservaciones(this PvProyectoFinalDB dataConnection, int? @idPersona, DateTime? @fechaEntrada, DateTime? @fechaSalida)
 		{
 			var parameters = new []
 			{
-				new DataParameter("@NumeroHabitacion", @NumeroHabitacion, LinqToDB.DataType.VarChar)
-				{
-					Size = 10
-				},
-				new DataParameter("@CapacidadMaxima",  @CapacidadMaxima,  LinqToDB.DataType.Int32),
-				new DataParameter("@Descripcion",      @Descripcion,      LinqToDB.DataType.VarChar)
-				{
-					Size = 500
-				},
-				new DataParameter("@Estado",           @Estado,           LinqToDB.DataType.VarChar)
-				{
-					Size = 1
-				},
-				new DataParameter("@IdHotel",          @IdHotel,          LinqToDB.DataType.Int32)
+				new DataParameter("@idPersona",    @idPersona,    LinqToDB.DataType.Int32),
+				new DataParameter("@fechaEntrada", @fechaEntrada, LinqToDB.DataType.Date),
+				new DataParameter("@fechaSalida",  @fechaSalida,  LinqToDB.DataType.Date)
 			};
 
-			return dataConnection.ExecuteProc("[dbo].[SpCrearHabitacion]", parameters);
+			return dataConnection.QueryProc<SpFiltrarReservacionesResult>("[dbo].[SpFiltrarReservaciones]", parameters);
 		}
 
-		#endregion
-
-		#region SpEditarHabitacion
-
-		public static int SpEditarHabitacion(this PvProyectoFinalDB dataConnection, int? @idHabitacion, int? @idHotel, string @numeroHabitacion, int? @capacidadMaxima, string @descripcion, string @Estado)
+		public partial class SpFiltrarReservacionesResult
 		{
-			var parameters = new []
-			{
-				new DataParameter("@idHabitacion",     @idHabitacion,     LinqToDB.DataType.Int32),
-				new DataParameter("@idHotel",          @idHotel,          LinqToDB.DataType.Int32),
-				new DataParameter("@numeroHabitacion", @numeroHabitacion, LinqToDB.DataType.VarChar)
-				{
-					Size = 10
-				},
-				new DataParameter("@capacidadMaxima",  @capacidadMaxima,  LinqToDB.DataType.Int32),
-				new DataParameter("@descripcion",      @descripcion,      LinqToDB.DataType.VarChar)
-				{
-					Size = 500
-				},
-				new DataParameter("@Estado",           @Estado,           LinqToDB.DataType.VarChar)
-				{
-					Size = 10
-				}
-			};
-
-			return dataConnection.ExecuteProc("[dbo].[spEditarHabitacion]", parameters);
-		}
-
-		#endregion
-
-		#region SpEliminarHabitaciones
-
-		public static int SpEliminarHabitaciones(this PvProyectoFinalDB dataConnection, int? @idHabitacion)
-		{
-			var parameters = new []
-			{
-				new DataParameter("@idHabitacion", @idHabitacion, LinqToDB.DataType.Int32)
-			};
-
-			return dataConnection.ExecuteProc("[dbo].[SpEliminarHabitaciones]", parameters);
+			[Column("idReservacion")       ] public int       IdReservacion        { get; set; }
+			[Column("idPersona")           ] public int       IdPersona            { get; set; }
+			[Column("cliente")             ] public string    Cliente              { get; set; }
+			[Column("idHabitacion")        ] public int       IdHabitacion         { get; set; }
+			[Column("numeroHabitacion")    ] public string    NumeroHabitacion     { get; set; }
+			[Column("nombreHotel")         ] public string    NombreHotel          { get; set; }
+			[Column("fechaEntrada")        ] public DateTime  FechaEntrada         { get; set; }
+			[Column("fechaSalida")         ] public DateTime  FechaSalida          { get; set; }
+			[Column("numeroAdultos")       ] public int       NumeroAdultos        { get; set; }
+			[Column("numeroNinhos")        ] public int       NumeroNinhos         { get; set; }
+			[Column("totalDiasReservacion")] public int       TotalDiasReservacion { get; set; }
+			[Column("costoPorCadaAdulto")  ] public decimal   CostoPorCadaAdulto   { get; set; }
+			[Column("costoPorCadaNinho")   ] public decimal   CostoPorCadaNinho    { get; set; }
+			[Column("costoTotal")          ] public decimal   CostoTotal           { get; set; }
+			[Column("fechaCreacion")       ] public DateTime  FechaCreacion        { get; set; }
+			[Column("fechaModificacion")   ] public DateTime? FechaModificacion    { get; set; }
+			[Column("estado")              ] public char      Estado               { get; set; }
 		}
 
 		#endregion

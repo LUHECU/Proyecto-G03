@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                    <asp:RangeValidator ID="rvFechaEntrada" runat="server" ErrorMessage="Fecha requerida" ControlToValidate="txtEntrada"></asp:RangeValidator>
+                    <asp:RangeValidator ID="rvFechaEntrada" runat="server" ErrorMessage="Fecha requerida" ControlToValidate="txtFechaEntrada"></asp:RangeValidator>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                    <asp:RangeValidator ID="rvFechaSalida" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaSalida"></asp:RangeValidator>
+                    <asp:RangeValidator ID="rvFechaSalida" runat="server" ErrorMessage="Fecha requerida" ControlToValidate="txtFechaSalida"></asp:RangeValidator>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" ValidateEmptyText="true" OnServerValidate="cvFechaSalida_ServerValidate"></asp:CustomValidator>
+            <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" OnServerValidate="cvFechaSalida_ServerValidate"></asp:CustomValidator>
 
         </div>
    

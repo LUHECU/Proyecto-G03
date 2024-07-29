@@ -89,30 +89,42 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
 
-            using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
+            try
+            {
+                if (Page.IsValid)
+                {
+
+                    using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
+                    {
+
+                        object misReservFilt;
+
+                        int idPersona = int.TryParse(ddlPersona.SelectedValue.ToString(), out idPersona) == true ? int.Parse(ddlPersona.SelectedValue.ToString()) : 0;
+
+                        DateTime fechaEntrada = DateTime.TryParse(txtFechaEntrada.Text, out fechaEntrada) == true ? DateTime.Parse(txtFechaEntrada.Text) : DateTime.Parse("0001-01-01");
+
+                        DateTime fechaSalida = DateTime.TryParse(txtFechaSalida.Text, out fechaEntrada) == true ? DateTime.Parse(txtFechaSalida.Text) : DateTime.Parse("0001-01-01");
+
+                        //Se comprueba y se obtienen los datos para cargar el gridview según los datos administrados
+                        if (idPersona == 0 && fechaSalida == DateTime.Parse("0001-01-01") && fechaEntrada == DateTime.Parse("0001-01-01"))
+                        {
+                            misReservFilt = db.SpCosultarReservaciones().ToList();
+                        }
+                        else
+                        {
+                            misReservFilt = db.SpFiltrarReservaciones(idPersona, fechaEntrada, fechaSalida).ToList();
+                        }
+                        //Se cargan los datos en el gridview
+                        grdGestReserv.DataSource = misReservFilt;
+                        grdGestReserv.DataBind();
+
+                    }
+                }
+            }
+            catch
             {
 
-                object misReservFilt;
-
-                int idPersona = int.TryParse(ddlPersona.SelectedValue.ToString(), out idPersona) == true? int.Parse(ddlPersona.SelectedValue.ToString()): 0;
-
-                DateTime fechaEntrada = DateTime.TryParse(txtFechaEntrada.Text, out fechaEntrada) == true? DateTime.Parse(txtFechaEntrada.Text) : DateTime.Parse("0001-01-01");
-
-                DateTime fechaSalida = DateTime.TryParse(txtFechaSalida.Text, out fechaEntrada) == true ? DateTime.Parse(txtFechaSalida.Text) : DateTime.Parse("0001-01-01");
-
-                //Se comprueba y se obtienen los datos para cargar el gridview según los datos administrados
-                if (idPersona == 0 && fechaSalida == DateTime.Parse("0001-01-01") && fechaEntrada == DateTime.Parse("0001-01-01"))
-                {
-                    misReservFilt = db.SpCosultarReservaciones().ToList();
-                }
-                else
-                {
-                    misReservFilt = db.SpFiltrarReservaciones(idPersona, fechaEntrada, fechaSalida).ToList();
-                }
-                //Se cargan los datos en el gridview
-                grdGestReserv.DataSource = misReservFilt;
-                grdGestReserv.DataBind();
-
+                
             }
 
         }
@@ -121,6 +133,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         {
             try
             {
+
                 //Se comprueba que la fecha sea menor o igual a la de entrada
                 args.IsValid = false;
                 if (args.IsValid != null)
