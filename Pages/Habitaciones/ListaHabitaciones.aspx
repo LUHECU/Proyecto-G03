@@ -23,7 +23,7 @@
 
                         <asp:BoundField DataField="idHabitacion" HeaderText="ID" HeaderStyle-CssClass="header-center" ItemStyle-CssClass="data-center" />
 
-                        <asp:BoundField DataField="nombre" HeaderText="Hotel" HeaderStyle-CssClass="header-left" ItemStyle-CssClass="data-left" />
+                        <asp:BoundField DataField="nombreHotel" HeaderText="Hotel" HeaderStyle-CssClass="header-left" ItemStyle-CssClass="data-left" />
 
                         <asp:BoundField DataField="numeroHabitacion" HeaderText="Número Habitación" HeaderStyle-CssClass="header-center" ItemStyle-CssClass="data-center" />
 
