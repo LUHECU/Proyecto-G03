@@ -32,7 +32,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" >
                         <ItemTemplate>
-                            <a href="Detalle.aspx?id=<%#Eval("idReservacion")%>" class="btn btn-light btn-outline-secondary">Consultar</a>
+                            <a href="Detalle.aspx?id=<%# Eval("idReservacion")%>" class="btn btn-light btn-outline-secondary">Consultar</a>
                         </ItemTemplate>
                     </asp:TemplateField>
 
