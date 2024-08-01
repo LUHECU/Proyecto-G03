@@ -14,7 +14,7 @@
             </div>
 
             <div>
-                <asp:TextBox ID="txtHotel" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txtHotel" runat="server" ReadOnly="True" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
             </div>
 
             <div>
-                <asp:TextBox ID="txtNumHabitacion" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txtNumHabitacion" runat="server" ReadOnly="True" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             </div>
 
             <div>
-                <asp:TextBox ID="txtCliente" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txtCliente" runat="server" ReadOnly="True" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                 </div>
 
                 <div>
-                    <asp:TextBox ID="txtFechaEntrada" runat="server" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaEntrada" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                 </div>
 
                 <div>
-                    <asp:TextBox ID="txtFechaSalida" runat="server" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaSalida" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
 
@@ -68,21 +68,21 @@
 
             <div class="col col-sm-12 col-md-4 col-lg-2">
                 <div class="my-2">
-                    <asp:Label ID="lblAdultos" runat="server" Text="Fecha de Entrada"></asp:Label>
+                    <asp:Label ID="lblAdultos" runat="server" Text="Número de adultos"></asp:Label>
                 </div>
 
                 <div>
-                    <asp:TextBox ID="txtNumAdultos" runat="server" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="txtNumAdultos" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
 
             <div class="col col-sm-12 col-md-4 col-lg-2">
                 <div class="my-2">
-                    <asp:Label ID="lblNinhos" runat="server" Text="Fecha de Salida"></asp:Label>
+                    <asp:Label ID="lblNinhos" runat="server" Text="Número de niños"></asp:Label>
                 </div>
 
                 <div>
-                    <asp:TextBox ID="txtNumNinhos" runat="server" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="txtNumNinhos" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
             </div>
 
             <div class="col col-sm-2 col-md-2 col-lg-1 my-1">
-                <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-info"/>
+                <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-primary"/>
             </div>
 
         </div>

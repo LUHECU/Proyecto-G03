@@ -14,7 +14,7 @@
         <div>
 
             <%-- Agregar validacion de persona --%>
-            <asp:GridView ID="grdMisReserv" runat="server" AutoGenerateColumns="false" CssClass="border-1" CellPadding="10">
+            <asp:GridView ID="grdMisReserv" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered" CellPadding="10">
                 <Columns>
                     <asp:BoundField DataField="idReservacion" HeaderText="# reservación" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center"/>
                     <asp:BoundField DataField="nombreHotel" HeaderText="Hotel" ItemStyle-CssClass="w-auto"/>
