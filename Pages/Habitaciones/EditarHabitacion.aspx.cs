@@ -12,12 +12,9 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 {
     public partial class EditarHabitacion : System.Web.UI.Page
     {
-
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
                 if (IsPostBack == false)
@@ -45,12 +42,10 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             {
                 Response.Redirect("../Mensajes/Error.aspx");
             }
-
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 int idHotel = int.Parse(Request.QueryString["idHotel"]);
@@ -58,7 +53,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                 string numeroHabitacion = txtNumeroHabitacion.Text;
                 int capacidadMaxima = int.Parse(txtCapacidadMaxima.Text);
                 string descripcion = txtDescripcion.Text;
-                char estado = 'I';
+                char estado = 'A';
 
                 if (!string.IsNullOrEmpty(txtNumeroHabitacion.Text) &&
                     !string.IsNullOrEmpty(txtDescripcion.Text) &&
@@ -89,13 +84,10 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                 // Redirige a la página de confirmación solo si todo salió bien
                 Response.Redirect("../Mensajes/Confirmacion.aspx");
             }
-
-
         }
 
         protected void btnInactivar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 int id = int.Parse(Request.QueryString["id"]);
@@ -116,8 +108,6 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             {
                 Response.Redirect("../Mensajes/Confirmacion.aspx");
             }
-
-
         }
     }
 }

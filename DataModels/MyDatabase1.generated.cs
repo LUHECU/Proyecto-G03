@@ -22,8 +22,8 @@ namespace DataModels
 {
 	/// <summary>
 	/// Database       : PV_ProyectoFinal
-	/// Data Source    : LAPTOP-57J4RFLP\SQLEXPRESS
-	/// Server Version : 14.00.1000
+	/// Data Source    : LAPTOP-TKFN345G\SQLEXPRESS
+	/// Server Version : 14.00.2056
 	/// </summary>
 	public partial class PvProyectoFinalDB : LinqToDB.Data.DataConnection
 	{
@@ -207,6 +207,53 @@ namespace DataModels
 
 	public static partial class PvProyectoFinalDBStoredProcedures
 	{
+		#region ConsultarHabitacionesPorID
+
+		public static IEnumerable<ConsultarHabitacionesPorIDResult> ConsultarHabitacionesPorID(this PvProyectoFinalDB dataConnection, int? @idHabitaciones)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitaciones", @idHabitaciones, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<ConsultarHabitacionesPorIDResult>("[dbo].[ConsultarHabitacionesPorID]", parameters);
+		}
+
+		public partial class ConsultarHabitacionesPorIDResult
+		{
+			[Column("idHabitacion")    ] public int    IdHabitacion     { get; set; }
+			[Column("numeroHabitacion")] public string NumeroHabitacion { get; set; }
+			[Column("capacidadMaxima") ] public int    CapacidadMaxima  { get; set; }
+			[Column("descripcion")     ] public string Descripcion      { get; set; }
+			[Column("estado")          ] public char   Estado           { get; set; }
+			[Column("nombre")          ] public string Nombre           { get; set; }
+		}
+
+		#endregion
+
+		#region SpAlterdiagram
+
+		public static int SpAlterdiagram(this PvProyectoFinalDB dataConnection, string @diagramname, int? @ownerId, int? @version, byte[] @definition)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				},
+				new DataParameter("@owner_id",    @ownerId,     LinqToDB.DataType.Int32),
+				new DataParameter("@version",     @version,     LinqToDB.DataType.Int32),
+				new DataParameter("@definition",  @definition,  LinqToDB.DataType.VarBinary)
+				{
+					Size = -1
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[sp_alterdiagram]", parameters);
+		}
+
+		#endregion
+
 		#region SpConsultarBitacoras
 
 		public static IEnumerable<Bitacora> SpConsultarBitacoras(this PvProyectoFinalDB dataConnection)
@@ -216,20 +263,22 @@ namespace DataModels
 
 		#endregion
 
-		#region SpConsultarHabitacion
-
-		public static IEnumerable<Habitacion> SpConsultarHabitacion(this PvProyectoFinalDB dataConnection)
-		{
-			return dataConnection.QueryProc<Habitacion>("[dbo].[SpConsultarHabitacion]");
-		}
-
-		#endregion
-
 		#region SpConsultarHabitaciones
 
-		public static IEnumerable<Habitacion> SpConsultarHabitaciones(this PvProyectoFinalDB dataConnection)
+		public static IEnumerable<SpConsultarHabitacionesResult> SpConsultarHabitaciones(this PvProyectoFinalDB dataConnection)
 		{
-			return dataConnection.QueryProc<Habitacion>("[dbo].[SpConsultarHabitaciones]");
+			return dataConnection.QueryProc<SpConsultarHabitacionesResult>("[dbo].[SpConsultarHabitaciones]");
+		}
+
+		public partial class SpConsultarHabitacionesResult
+		{
+			[Column("idHabitacion")    ] public int    IdHabitacion     { get; set; }
+			[Column("nombreHotel")     ] public string NombreHotel      { get; set; }
+			[Column("numeroHabitacion")] public string NumeroHabitacion { get; set; }
+			[Column("capacidadMaxima") ] public int    CapacidadMaxima  { get; set; }
+			[Column("descripcion")     ] public string Descripcion      { get; set; }
+			[Column("estado")          ] public char   Estado           { get; set; }
+			[Column("idHotel")         ] public int    IdHotel          { get; set; }
 		}
 
 		#endregion
@@ -282,6 +331,116 @@ namespace DataModels
 
 		#endregion
 
+		#region SpCrearHabitacion
+
+		public static int SpCrearHabitacion(this PvProyectoFinalDB dataConnection, string @NumeroHabitacion, int? @CapacidadMaxima, string @Descripcion, char? @Estado, int? @IdHotel)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@NumeroHabitacion", @NumeroHabitacion, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@CapacidadMaxima",  @CapacidadMaxima,  LinqToDB.DataType.Int32),
+				new DataParameter("@Descripcion",      @Descripcion,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@Estado",           @Estado,           LinqToDB.DataType.NVarChar)
+				{
+					Size = 1
+				},
+				new DataParameter("@IdHotel",          @IdHotel,          LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[SpCrearHabitacion]", parameters);
+		}
+
+		#endregion
+
+		#region SpCreatediagram
+
+		public static int SpCreatediagram(this PvProyectoFinalDB dataConnection, string @diagramname, int? @ownerId, int? @version, byte[] @definition)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				},
+				new DataParameter("@owner_id",    @ownerId,     LinqToDB.DataType.Int32),
+				new DataParameter("@version",     @version,     LinqToDB.DataType.Int32),
+				new DataParameter("@definition",  @definition,  LinqToDB.DataType.VarBinary)
+				{
+					Size = -1
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[sp_creatediagram]", parameters);
+		}
+
+		#endregion
+
+		#region SpDropdiagram
+
+		public static int SpDropdiagram(this PvProyectoFinalDB dataConnection, string @diagramname, int? @ownerId)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				},
+				new DataParameter("@owner_id",    @ownerId,     LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[sp_dropdiagram]", parameters);
+		}
+
+		#endregion
+
+		#region SpEditarHabitacion
+
+		public static int SpEditarHabitacion(this PvProyectoFinalDB dataConnection, int? @idHabitacion, int? @idHotel, string @numeroHabitacion, int? @capacidadMaxima, string @descripcion, char? @Estado)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitacion",     @idHabitacion,     LinqToDB.DataType.Int32),
+				new DataParameter("@idHotel",          @idHotel,          LinqToDB.DataType.Int32),
+				new DataParameter("@numeroHabitacion", @numeroHabitacion, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@capacidadMaxima",  @capacidadMaxima,  LinqToDB.DataType.Int32),
+				new DataParameter("@descripcion",      @descripcion,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@Estado",           @Estado,           LinqToDB.DataType.VarChar)
+				{
+					Size = 1
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[spEditarHabitacion]", parameters);
+		}
+
+		#endregion
+
+		#region SpEliminarHabitaciones
+
+		public static int SpEliminarHabitaciones(this PvProyectoFinalDB dataConnection, int? @idHabitacion)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitacion", @idHabitacion, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[SpEliminarHabitaciones]", parameters);
+		}
+
+		#endregion
+
 		#region SpFiltrarReservaciones
 
 		public static IEnumerable<SpFiltrarReservacionesResult> SpFiltrarReservaciones(this PvProyectoFinalDB dataConnection, int? @idPersona, DateTime? @fechaEntrada, DateTime? @fechaSalida)
@@ -315,6 +474,115 @@ namespace DataModels
 			[Column("fechaCreacion")       ] public DateTime  FechaCreacion        { get; set; }
 			[Column("fechaModificacion")   ] public DateTime? FechaModificacion    { get; set; }
 			[Column("estado")              ] public char      Estado               { get; set; }
+		}
+
+		#endregion
+
+		#region SpHelpdiagramdefinition
+
+		public static IEnumerable<SpHelpdiagramdefinitionResult> SpHelpdiagramdefinition(this PvProyectoFinalDB dataConnection, string @diagramname, int? @ownerId)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				},
+				new DataParameter("@owner_id",    @ownerId,     LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<SpHelpdiagramdefinitionResult>("[dbo].[sp_helpdiagramdefinition]", parameters);
+		}
+
+		public partial class SpHelpdiagramdefinitionResult
+		{
+			[Column("version")   ] public int?   Version    { get; set; }
+			[Column("definition")] public byte[] Definition { get; set; }
+		}
+
+		#endregion
+
+		#region SpHelpdiagrams
+
+		public static IEnumerable<SpHelpdiagramsResult> SpHelpdiagrams(this PvProyectoFinalDB dataConnection, string @diagramname, int? @ownerId)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				},
+				new DataParameter("@owner_id",    @ownerId,     LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<SpHelpdiagramsResult>("[dbo].[sp_helpdiagrams]", parameters);
+		}
+
+		public partial class SpHelpdiagramsResult
+		{
+			public string Database { get; set; }
+			public string Name     { get; set; }
+			public int    ID       { get; set; }
+			public string Owner    { get; set; }
+			public int    OwnerID  { get; set; }
+		}
+
+		#endregion
+
+		#region SpInactivarHabitacion
+
+		public static int SpInactivarHabitacion(this PvProyectoFinalDB dataConnection, int? @idHabitacion)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitacion", @idHabitacion, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[SpInactivarHabitacion]", parameters);
+		}
+
+		#endregion
+
+		#region SpRenamediagram
+
+		public static int SpRenamediagram(this PvProyectoFinalDB dataConnection, string @diagramname, int? @ownerId, string @newDiagramname)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@diagramname",     @diagramname,    LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				},
+				new DataParameter("@owner_id",        @ownerId,        LinqToDB.DataType.Int32),
+				new DataParameter("@new_diagramname", @newDiagramname, LinqToDB.DataType.NVarChar)
+				{
+					Size = 128
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[sp_renamediagram]", parameters);
+		}
+
+		#endregion
+
+		#region SpUpgraddiagrams
+
+		public static int SpUpgraddiagrams(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.ExecuteProc("[dbo].[sp_upgraddiagrams]");
+		}
+
+		#endregion
+	}
+
+	public static partial class SqlFunctions
+	{
+		#region FnDiagramobjects
+
+		[Sql.Function(Name="[dbo].[fn_diagramobjects]", ServerSideOnly=true)]
+		public static int? FnDiagramobjects()
+		{
+			throw new InvalidOperationException();
 		}
 
 		#endregion

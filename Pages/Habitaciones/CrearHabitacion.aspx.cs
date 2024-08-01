@@ -3,6 +3,7 @@ using LinqToDB;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -30,11 +31,14 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                     {
                         var query = db.SpConsultarHoteles()
+                        .OrderBy(hotel => hotel.Nombre) // Ordena por el nombre del hotel
                         .Select(S => new ListItem(S.Nombre, S.IdHotel.ToString()))
                         .ToList();
 
                         lista.AddRange(query);
                     }
+                    // Ordenar la lista usando LINQ
+                    var listaOrdenada = lista.OrderBy(item => item.Text).ToList();
 
                     ddlHoteles.DataSource = lista;
                     ddlHoteles.DataTextField = "Text";
@@ -78,9 +82,11 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                         //!string.IsNullOrEmpty(txtEstado.Text) && // Este campo es revisado, pero no se usa en la asignación
                         !string.IsNullOrEmpty(txtCapacidadMaxima.Text))
                     {
+                     
                         // Guardar la habitación en la base de datos
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                         {
+
                             db.SpCrearHabitacion(numeroHabitacion, capacidadMaxima, descripcion, estado, idHotel);
                         }
 
@@ -92,12 +98,26 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2601 || ex.Number == 2627) // Número de error para duplicados
+                {
+                    // Redirige a la página de error específica para duplicado
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                }
+                else
+                {
+                    // Redirige a la página de error genérica para otros errores de base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                }
+            }
             catch (Exception ex)
             {
 
                 Response.Redirect("~/Pages/Mensajes/Error.aspx");
 
             }
+
             Response.Redirect("~/Pages/Mensajes//Confirmacion.aspx");
         }
     }
