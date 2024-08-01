@@ -24,7 +24,8 @@
                     <asp:Label ID="lblFechaEntrada" runat="server" Text="Fecha entrada"></asp:Label>
                 </div>
                 <div>
-                    <asp:TextBox ID="txtFechaEntrada" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -33,7 +34,8 @@
                     <asp:Label ID="lblFechaSalida" runat="server" Text="Fecha salida"></asp:Label>
                 </div>
                 <div>
-                    <asp:TextBox ID="txtFechaSalida" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaSalida"></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -45,14 +47,17 @@
                     <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" CssClass="btn btn-info text text-light"/>
                 </div>
             </div>
+
+            <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" OnServerValidate="cvFechaSalida_ServerValidate"></asp:CustomValidator>
+
         </div>
    
         <div class="m mt-4">
             <a href="CrearReservacion.aspx" class="btn btn-info text text-light">Nueva Resevación</a>
         </div>
 
-        <div>
-            <asp:GridView ID="grdGestionarReserv" runat="server">
+        <div class="mt-3">
+            <asp:GridView ID="grdGestReserv" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered" CellPadding="10" >
                 <Columns>
                     <asp:BoundField DataField=""/>
                 </Columns>

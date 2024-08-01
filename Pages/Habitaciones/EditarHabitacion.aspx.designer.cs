@@ -15,13 +15,13 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
     {
 
         /// <summary>
-        /// Control lblIdhabitacion.
+        /// Control lblHabitacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIdhabitacion;
+        protected global::System.Web.UI.WebControls.Label lblHabitacion;
 
         /// <summary>
         /// Control txtIdhotel.

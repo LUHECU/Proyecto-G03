@@ -33,6 +33,15 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         protected global::System.Web.UI.WebControls.DropDownList ddlHoteles;
 
         /// <summary>
+        /// Control rfvHotel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHotel;
+
+        /// <summary>
         /// Control lblNumeroHabitacion.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumeroHabitacion;
+
+        /// <summary>
+        /// Control rfvNumeroHabitacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroHabitacion;
 
         /// <summary>
         /// Control lblCapacidadMaxima.
@@ -69,6 +87,24 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         protected global::System.Web.UI.WebControls.TextBox txtCapacidadMaxima;
 
         /// <summary>
+        /// Control rfvCapacidadMaxima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCapacidadMaxima;
+
+        /// <summary>
+        /// Control rvCapacidadMaxima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvCapacidadMaxima;
+
+        /// <summary>
         /// Control lblDescripcion.
         /// </summary>
         /// <remarks>
@@ -85,6 +121,15 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+
+        /// <summary>
+        /// Control rfvDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescripcion;
 
         /// <summary>
         /// Control btnGuardar.

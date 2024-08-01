@@ -12,32 +12,34 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 {
     public partial class EditarHabitacion : System.Web.UI.Page
     {
+
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             try
             {
                 if (IsPostBack == false)
                 {
                     int id = int.Parse(Request.QueryString["id"]);
-                  
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
-                {
-                    var habitaciones = db.ConsultarHabitacionesPorID(id).FirstOrDefault();
+                    {
+                        var habitaciones = db.ConsultarHabitacionesPorID(id).FirstOrDefault();
 
-                    if (habitaciones != null)
-                    {
-                        txtIdhotel.Text= habitaciones.Nombre;
-                        txtNumeroHabitacion.Text = habitaciones.NumeroHabitacion;
-                        txtCapacidadMaxima.Text = habitaciones.CapacidadMaxima.ToString();
-                        txtDescripcion.Text = habitaciones.Descripcion;
-                    }
-                    else
-                    {
-                        Response.Redirect("../Mensajes/Error.aspx");
+                        if (habitaciones != null)
+                        {
+                            txtIdhotel.Text = habitaciones.Nombre;
+                            txtNumeroHabitacion.Text = habitaciones.NumeroHabitacion;
+                            txtCapacidadMaxima.Text = habitaciones.CapacidadMaxima.ToString();
+                            txtDescripcion.Text = habitaciones.Descripcion;
+                        }
+                        else
+                        {
+                            Response.Redirect("../Mensajes/Error.aspx");
+                        }
                     }
                 }
-            }
             }
             catch
             {
@@ -46,13 +48,9 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 
         }
 
-  
-
-        
-
-
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+
             try
             {
                 int idHotel = int.Parse(Request.QueryString["idHotel"]);
@@ -80,9 +78,8 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     Response.Redirect("../Mensajes/Error.aspx");
 
                 }
-                
             }
-            catch 
+            catch
             {
                 // Redirige a la página de error si ocurre una excepción
                 Response.Redirect("../Mensajes/Error.aspx");
@@ -93,10 +90,12 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                 Response.Redirect("../Mensajes/Confirmacion.aspx");
             }
 
+
         }
 
         protected void btnInactivar_Click(object sender, EventArgs e)
         {
+
             try
             {
                 int id = int.Parse(Request.QueryString["id"]);
@@ -117,6 +116,8 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             {
                 Response.Redirect("../Mensajes/Confirmacion.aspx");
             }
+
+
         }
     }
 }

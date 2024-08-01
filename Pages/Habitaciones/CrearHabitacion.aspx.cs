@@ -17,6 +17,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Page.IsPostBack == false)
             {
                 try
@@ -40,22 +41,6 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     ddlHoteles.DataValueField = "Value";
                     ddlHoteles.DataBind();
 
-
-                    ddlHoteles.Items.FindByValue("0").Selected = true;
-
-                }
-                catch
-                {
-                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
-                }
-
-
-            }
-        }
-      
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-
             try
             {
 
@@ -71,6 +56,48 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     string descripcion = txtDescripcion.Text;
                     char estado = 'A'; // Asignar 'I' directamente
                     int idHotel = int.Parse(id); 
+
+                    // Verificar que todos los campos de la habitación están completos
+                    if (!string.IsNullOrEmpty(numeroHabitacion) &&
+                        !string.IsNullOrEmpty(descripcion) &&
+                        //!string.IsNullOrEmpty(txtEstado.Text) && // Este campo es revisado, pero no se usa en la asignación
+                        !string.IsNullOrEmpty(txtCapacidadMaxima.Text))
+                    {
+                        // Guardar la habitación en la base de datos
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        {
+                            db.SpCrearHabitacion(numeroHabitacion, capacidadMaxima, descripcion, estado, idHotel);
+                        }
+
+                    ddlHoteles.Items.FindByValue("0").Selected = true;
+
+                }
+                catch
+                {
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                }
+
+
+            }
+
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (ddlHoteles.SelectedItem != null)
+                {
+                    string id = ddlHoteles.SelectedItem.Value;
+                    string NombreHotel = ddlHoteles.SelectedItem.Text;
+
+
+                    string numeroHabitacion = txtNumeroHabitacion.Text;
+                    int capacidadMaxima = int.Parse(txtCapacidadMaxima.Text);
+                    string descripcion = txtDescripcion.Text;
+                    char estado = 'A'; // Asignar 'I' directamente
+                    int idHotel = int.Parse(id);
 
                     // Verificar que todos los campos de la habitación están completos
                     if (!string.IsNullOrEmpty(numeroHabitacion) &&
