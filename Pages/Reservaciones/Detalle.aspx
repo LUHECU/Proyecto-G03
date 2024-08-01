@@ -10,7 +10,7 @@
 
         <div>
 
-            <asp:Table runat="server" CssClass="table-bordered">
+            <asp:Table runat="server" CssClass="table">
                 <asp:TableRow>
                     <asp:TableCell>
                         # reservación
@@ -49,7 +49,7 @@
                         Cliente
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label ID="lblCLient" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="lblCLiente" runat="server" Text=""></asp:Label>
                     </asp:TableCell>
 
                 </asp:TableRow>
@@ -124,23 +124,24 @@
 
         <div class="row">
 
-            <div class="col col-sm-6 col-md-4 col-lg-2">
+            <div class="col col-sm-6 col-md-4 col-lg-1 mr-5">
                  <div class="mt-4">
-                     <asp:Button ID="btnEditarReserv" runat="server" Text="Editar reservación" CssClass="btn btn-primary"/>
+                     <asp:Button ID="btnEditarReserv" runat="server" Text="Editar reservación" CssClass="btn btn-primary" OnClick="btnEditarReserv_Click"/>
                  </div>
              </div>
 
-            <div class="col col-sm-6 col-md-4 col-lg-2">
-                 <div class="mt-4">
+            <div class="col col-sm-6 col-md-4 col-lg-1 mx-5 ">
+                 <div class="mt-4 mx-4">
                      <asp:Button ID="btnCancelarReserv" runat="server" Text="Cancelar reservacion" CssClass="btn btn-danger"/>
                  </div>
              </div>
 
-            <div class="col col-sm-6 col-md-4 col-lg-2">
-                 <div class="mt-4">
+            <div class="col col-sm-6 col-md-4 col-lg-1 mx-5">
+                 <div class="mt-4 mx-4">
                      <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-light btn-outline-secondary"/>
                  </div>
              </div>
+
 
         </div>
 
@@ -152,11 +153,11 @@
             </div>
 
             <div>
-                <asp:GridView ID="grdBitacora" runat="server">
+                <asp:GridView ID="grdBitacora" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered">
                     <Columns>
-                        <asp:BoundField DataField="" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy hh/mm}"/>
-                        <asp:BoundField DataField="" HeaderText="Acción"/>
-                        <asp:BoundField DataField="" HeaderText="Realizado por"/>
+                        <asp:BoundField DataField="fechaDeLaAccion" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy hh/mm}"/>
+                        <asp:BoundField DataField="accionRealizada" HeaderText="Acción"/>
+                        <asp:BoundField DataField="nombreCompleto" HeaderText="Realizado por"/>
                     </Columns>
                 </asp:GridView>
             </div>

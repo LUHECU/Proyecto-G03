@@ -23,8 +23,8 @@
                     <asp:Label ID="lblFechaEntrada" runat="server" Text="Fecha entrada"></asp:Label>
                 </div>
                 <div>
-                    <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                    <asp:RangeValidator ID="rvFechaEntrada" runat="server" ErrorMessage="Fecha requerida" ControlToValidate="txtFechaEntrada"></asp:RangeValidator>
+                    <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                    <asp:RangeValidator ID="rvFechaSalida" runat="server" ErrorMessage="Fecha requerida" ControlToValidate="txtFechaSalida"></asp:RangeValidator>
+                    <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaSalida"></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
         </div>
 
         <div class="mt-3">
-            <asp:GridView ID="grdGestReserv" runat="server" AutoGenerateColumns="false" CssClass="border-1" CellPadding="10">
+            <asp:GridView ID="grdGestReserv" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered" CellPadding="10" >
                 <Columns>
                     <asp:BoundField DataField="idReservacion" HeaderText="# reservación" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center"/>
                     <asp:BoundField DataField="cliente" HeaderText="Cliente" ItemStyle-CssClass="w-auto"/>

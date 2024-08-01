@@ -101,19 +101,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 
                         int idPersona = int.TryParse(ddlPersona.SelectedValue.ToString(), out idPersona) == true ? int.Parse(ddlPersona.SelectedValue.ToString()) : 0;
 
-                        DateTime fechaEntrada = DateTime.TryParse(txtFechaEntrada.Text, out fechaEntrada) == true ? DateTime.Parse(txtFechaEntrada.Text) : DateTime.Parse("0001-01-01");
+                        DateTime fechaEntrada = DateTime.Parse(txtFechaEntrada.Text);
 
-                        DateTime fechaSalida = DateTime.TryParse(txtFechaSalida.Text, out fechaEntrada) == true ? DateTime.Parse(txtFechaSalida.Text) : DateTime.Parse("0001-01-01");
+                        DateTime fechaSalida =  DateTime.Parse(txtFechaSalida.Text);
 
-                        //Se comprueba y se obtienen los datos para cargar el gridview según los datos administrados
-                        if (idPersona == 0 && fechaSalida == DateTime.Parse("0001-01-01") && fechaEntrada == DateTime.Parse("0001-01-01"))
-                        {
-                            misReservFilt = db.SpCosultarReservaciones().ToList();
-                        }
-                        else
-                        {
-                            misReservFilt = db.SpFiltrarReservaciones(idPersona, fechaEntrada, fechaSalida).ToList();
-                        }
+                        //Sse obtienen los datos para cargar el gridview según los filtros administrados
+                        misReservFilt = db.SpFiltrarReservaciones(idPersona, fechaEntrada, fechaSalida).ToList();
+                        
                         //Se cargan los datos en el gridview
                         grdGestReserv.DataSource = misReservFilt;
                         grdGestReserv.DataBind();
@@ -138,7 +132,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 args.IsValid = false;
                 if (args.IsValid != null)
                 {
-                    if (DateTime.Parse(args.Value) <= DateTime.Parse(txtFechaEntrada.Text))
+                    if (DateTime.Parse(args.Value) >= DateTime.Parse(txtFechaEntrada.Text))
                     {
                         args.IsValid = true;
                     }
