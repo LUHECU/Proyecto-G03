@@ -1,5 +1,6 @@
 ﻿using DataModels;
 using LinqToDB;
+using ProyectoFinal_G03.Clases;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,20 +17,32 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            try
+            if (Session["usuario"] != null)
             {
-                using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                try
+                {
+                    if (!Page.IsPostBack)
+                    {
+                        Usuario objUsuario = (Usuario)Session["usuario"];
+                        int idPersona = objUsuario.idPersona;
+
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        {
+
+                            var misReserv = db.SpCosultarReservacionesPorId(idPersona).ToList();
+                            grdMisReserv.DataSource = misReserv;
+                            grdMisReserv.DataBind();
+                        }
+                    }
+                }
+                catch
                 {
 
-                    var misReserv = db.SpCosultarReservaciones().ToList();
-                    grdMisReserv.DataSource = misReserv;
-                    grdMisReserv.DataBind();
                 }
             }
-            catch
+            else
             {
-
+                Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
 
         }

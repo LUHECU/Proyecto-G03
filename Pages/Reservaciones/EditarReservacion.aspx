@@ -92,7 +92,7 @@
         <div class="row">
 
             <div class="col col-sm-2 col-md-2 col-lg-1 my-1">
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success"/>
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click"/>
             </div>
 
             <div class="col col-sm-2 col-md-2 col-lg-1 my-1">

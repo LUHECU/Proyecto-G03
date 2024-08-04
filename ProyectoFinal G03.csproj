@@ -267,6 +267,7 @@
     <Content Include="Pages\Habitaciones\CrearHabitacion.aspx" />
     <Content Include="Pages\Habitaciones\EditarHabitacion.aspx" />
     <Content Include="Pages\Habitaciones\ListaHabitaciones.aspx" />
+    <Content Include="Pages\InicioSesion\Inicio.aspx" />
     <Content Include="Pages\Mensajes\Confirmacion.aspx" />
     <Content Include="Pages\Mensajes\Error.aspx" />
     <Content Include="Pages\Reservaciones\CrearReservacion.aspx" />
@@ -369,6 +370,7 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clases\Usuario.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -411,6 +413,13 @@
     </Compile>
     <Compile Include="Pages\Habitaciones\ListaHabitaciones.aspx.designer.cs">
       <DependentUpon>ListaHabitaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InicioSesion\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\InicioSesion\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Mensajes\Confirmacion.aspx.cs">
       <DependentUpon>Confirmacion.aspx</DependentUpon>

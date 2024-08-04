@@ -1,5 +1,6 @@
 ﻿using DataModels;
 using LinqToDB;
+using ProyectoFinal_G03.Clases;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,38 +18,54 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            try
+            if (Session["usuario"] != null)//Se valida la sesión
             {
-                if (!Page.IsPostBack)
+                try
                 {
+                    Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
 
-                    var listaPersonas = new List<ListItem>();
-                    listaPersonas.Add(new ListItem("Selecione un cliente", "0"));
-
-                    using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
+                    if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
                     {
-                        //Se obtienen los datos para cargar el gridview
-                        var misReserv = db.SpCosultarReservaciones().ToList();
+                        if (!Page.IsPostBack)
+                        {
 
-                        //Se cargan los datos en el gridview
-                        grdGestReserv.DataSource = misReserv;
-                        grdGestReserv.DataBind();
+                            var listaPersonas = new List<ListItem>();
+                            listaPersonas.Add(new ListItem("Selecione un cliente", "0"));
 
-                        //Se obtienen los datos para cargar el dropdownlist
-                        var query = db.SpConsultarPersonas().Select(per => new ListItem(per.NombreCompleto, per.IdPersona.ToString()));
-                        listaPersonas.AddRange(query);
+                            using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
+                            {
+                                //Se obtienen los datos para cargar el gridview
+                                var misReserv = db.SpCosultarReservaciones().ToList();
 
-                        //Se cargan los datos en el dropdownlist
-                        ddlPersona.DataSource = listaPersonas;
-                        ddlPersona.DataTextField = "Text";
-                        ddlPersona.DataValueField = "Value";
-                        ddlPersona.DataBind();
+                                //Se cargan los datos en el gridview
+                                grdGestReserv.DataSource = misReserv;
+                                grdGestReserv.DataBind();
+
+                                //Se obtienen los datos para cargar el dropdownlist
+                                var query = db.SpConsultarPersonas().Select(per => new ListItem(per.NombreCompleto, per.IdPersona.ToString()));
+                                listaPersonas.AddRange(query);
+
+                                //Se cargan los datos en el dropdownlist
+                                ddlPersona.DataSource = listaPersonas;
+                                ddlPersona.DataTextField = "Text";
+                                ddlPersona.DataValueField = "Value";
+                                ddlPersona.DataBind();
+                            }
+                        }
+                    }
+                    else//Si es cliente, redireciona a la página de mis reservaciones
+                    {
+                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                     }
                 }
-            }
-            catch
-            {
+                catch
+                {
 
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
 
         }
