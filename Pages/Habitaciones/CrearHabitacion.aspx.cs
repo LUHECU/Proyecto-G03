@@ -18,48 +18,57 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Page.IsPostBack == false)
+            if (Session["usuario"] != null)//Se valida la sesión
             {
-                try
+
+                if (Page.IsPostBack == false)
                 {
-                    var lista = new List<ListItem>();
-
-                    lista.Add(new ListItem("Seleccione un valor", "0"));
-                    //lista.Add(new ListItem("gatos"));
-
-                    using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                    try
                     {
-                        var query = db.SpConsultarHoteles()
-                        .OrderBy(hotel => hotel.Nombre) // Ordena por el nombre del hotel
-                        .Select(S => new ListItem(S.Nombre, S.IdHotel.ToString()))
-                        .ToList();
+                        var lista = new List<ListItem>();
 
-                        lista.AddRange(query);
+                        lista.Add(new ListItem("Seleccione un valor", "0"));
+                        //lista.Add(new ListItem("gatos"));
+
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        {
+                            var query = db.SpConsultarHoteles()
+                            .OrderBy(hotel => hotel.Nombre) // Ordena por el nombre del hotel
+                            .Select(S => new ListItem(S.Nombre, S.IdHotel.ToString()))
+                            .ToList();
+
+                            lista.AddRange(query);
+                        }
+                        // Ordenar la lista usando LINQ
+                        var listaOrdenada = lista.OrderBy(item => item.Text).ToList();
+
+                        ddlHoteles.DataSource = lista;
+                        ddlHoteles.DataTextField = "Text";
+                        ddlHoteles.DataValueField = "Value";
+                        ddlHoteles.DataBind();
+
+
+                        ddlHoteles.Items.FindByValue("0").Selected = true;
+
                     }
-                    // Ordenar la lista usando LINQ
-                    var listaOrdenada = lista.OrderBy(item => item.Text).ToList();
+                    catch
+                    {
+                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                    }
 
-                    ddlHoteles.DataSource = lista;
-                    ddlHoteles.DataTextField = "Text";
-                    ddlHoteles.DataValueField = "Value";
-                    ddlHoteles.DataBind();
-
-
-                    ddlHoteles.Items.FindByValue("0").Selected = true;
 
                 }
-                catch
+
+                else
                 {
-                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                    Response.Redirect("../Reservaciones/Error");
                 }
-
 
             }
-
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+
+            protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {

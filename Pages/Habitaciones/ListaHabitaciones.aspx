@@ -52,23 +52,11 @@
                         </asp:TemplateField>
  
                         <asp:TemplateField>
-
                             <ItemTemplate>
-
-                                <%-- Con esto verifico si el estado de la habitación, si es A  muestra el enlace de edición --%>
-
-                       <%# 
-                        // Es una forma compacta de escribir una instrucción if-else.
-                        // Evalúa si el estado es "A" (Activo).
-                        // Si es verdadero, muestra un enlace para editar la habitación.
-                        // Si es falso, muestra un enlace que informa que la habitación no puede ser editada.
-    
-                        Eval("estado").ToString() == "A" 
+                        <%# Eval("estado").ToString() == "A" 
                             ? $"<a href='EditarHabitacion.aspx?id={Eval("idHabitacion")}&idHotel={Eval("idHotel")}' class='btn btn-secondary'>Modificar</a>"
-                            : $"<a href='/Pages/Mensajes/Error.aspx' class='btn btn-secondary'> Modificar</a>" 
-                        %>
-
-                    </ItemTemplate>
+                            : "<a href='#' class='btn btn-secondary disabled'>Modificar</a>" %>
+                        </ItemTemplate>
 
                         </asp:TemplateField>
 

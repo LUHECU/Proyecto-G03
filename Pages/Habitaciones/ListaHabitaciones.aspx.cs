@@ -1,5 +1,6 @@
 ﻿using DataModels;
 using LinqToDB;
+using ProyectoFinal_G03.Clases;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,20 +20,39 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         {
             try
             {
-                //using para contruir la conexión
-                using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                // Verificar si el usuario está autenticado y es un empleado
+                if (Session["usuario"] != null)
                 {
+                    Usuario usuario = (Usuario)Session["usuario"];
 
-                    var lista = db.SpConsultarHabitaciones().ToList();
-                    grdHabitaciones.DataSource = lista;
-                    grdHabitaciones.DataBind();
+                    // Verificar si el usuario es un empleado
+                    if (usuario.esEmpleado)
+                    {
+                        // Usar 'using' para construir la conexión
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        {
+                            var lista = db.SpConsultarHabitaciones().ToList();
+                            grdHabitaciones.DataSource = lista;
+                            grdHabitaciones.DataBind();
+                        }
+                    }
+                    else
+                    {
+                        // Si no es empleado, redirigir a una página de error o de acceso denegado
+                        Response.Redirect("~/Pages/Mensajes/AccesoDenegado.aspx");
+                    }
+                }
+                else
+                {
+                    // Si no hay sesión activa, redirigir al usuario a la página de login
+                    Response.Redirect("~/Pages/Acceso/Login.aspx");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                //Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                // Manejo de errores
+                Response.Redirect("~/Pages/Mensajes/Error.aspx");
             }
-
         }
     }
 }

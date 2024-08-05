@@ -32,6 +32,11 @@ namespace ProyectoFinal_G03
                     Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
                 }
             }
+            //else
+            //{
+            //    // Oculta la opción de "Gestionar Habitaciones" y el botón de cerrar sesión si el usuario no está autenticado
+            //    liGestionarHabitaciones.Visible = false;
+            //}
 
         }
 
