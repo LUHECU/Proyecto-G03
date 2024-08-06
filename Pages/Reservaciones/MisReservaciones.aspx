@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisReservaciones.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Reservaciones.MisReservaciones" %>
+﻿<%@ Page Title="Mis Reservaciones" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MisReservaciones.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Reservaciones.MisReservaciones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
@@ -18,14 +18,14 @@
                 <Columns>
                     <asp:BoundField DataField="idReservacion" HeaderText="# reservación" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center"/>
                     <asp:BoundField DataField="nombreHotel" HeaderText="Hotel" ItemStyle-CssClass="w-auto"/>
-                    <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada" ItemStyle-CssClass="w-auto" DataFormatString="{0:dd/MM/yyyy}"/>
-                    <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" ItemStyle-CssClass="w-auto" DataFormatString="{0:dd/MM/yyyy}"/>
-                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" HeaderText="Costo">
+                    <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:TemplateField ItemStyle-CssClass="text-end w-auto" HeaderStyle-CssClass="text-end" HeaderText="Costo">
                         <ItemTemplate>
                             $<%# Decimal.Parse(Eval("costoTotal").ToString())%>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" HeaderText="Estado">
+                    <asp:TemplateField ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center" HeaderText="Estado">
                         <ItemTemplate>
                             <%# estadoReservacion(DateTime.Parse(Eval("FechaEntrada").ToString()), DateTime.Parse(Eval("fechaSalida").ToString()), Eval("estado").ToString())%>
                         </ItemTemplate>

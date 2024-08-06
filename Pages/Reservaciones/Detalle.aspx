@@ -138,7 +138,7 @@
 
             <div class="col col-sm-6 col-md-4 col-lg-1 mx-5">
                  <div class="mt-4 mx-4">
-                     <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-light btn-outline-secondary"/>
+                     <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-light btn-outline-secondary" OnClick="btnRegresar_Click" />
                  </div>
              </div>
 

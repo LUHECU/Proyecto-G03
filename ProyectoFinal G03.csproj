@@ -273,7 +273,7 @@
     <Content Include="Pages\Reservaciones\CrearReservacion.aspx" />
     <Content Include="Pages\Reservaciones\Detalle.aspx" />
     <Content Include="Pages\Reservaciones\EditarReservacion.aspx" />
-    <Content Include="Pages\Reservaciones\GestiornarReservaciones.aspx" />
+    <Content Include="Pages\Reservaciones\GestionarReservaciones.aspx" />
     <Content Include="Pages\Reservaciones\MisReservaciones.aspx" />
     <Content Include="Pages\Styles.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -456,12 +456,12 @@
     <Compile Include="Pages\Reservaciones\EditarReservacion.aspx.designer.cs">
       <DependentUpon>EditarReservacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Reservaciones\GestiornarReservaciones.aspx.cs">
-      <DependentUpon>GestiornarReservaciones.aspx</DependentUpon>
+    <Compile Include="Pages\Reservaciones\GestionarReservaciones.aspx.cs">
+      <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Reservaciones\GestiornarReservaciones.aspx.designer.cs">
-      <DependentUpon>GestiornarReservaciones.aspx</DependentUpon>
+    <Compile Include="Pages\Reservaciones\GestionarReservaciones.aspx.designer.cs">
+      <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Reservaciones\MisReservaciones.aspx.cs">
       <DependentUpon>MisReservaciones.aspx</DependentUpon>

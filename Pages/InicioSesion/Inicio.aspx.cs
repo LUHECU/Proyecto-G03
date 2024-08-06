@@ -41,7 +41,7 @@ namespace ProyectoFinal_G03.Pages.InicioSesion
                         Session["usuario"] = objUsuario;
                         Session.Timeout = 5;
 
-                        Response.Redirect("~/Pages/Reservaciones/GestiornarReservaciones.aspx");
+                        Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx");
                     }
                     else 
                     {
