@@ -11,18 +11,18 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoFinal_G03.Pages.Reservaciones
 {
-    public partial class GestiornarReservaciones : System.Web.UI.Page
+    public partial class GestionarReservaciones : System.Web.UI.Page
     {
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;//Se crea una conexión para asociar la base de datos
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Session["usuario"] != null)//Se valida la sesión
             {
                 try
                 {
                     Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
+
+                    int idPersona = objUsuario.idPersona;
 
                     if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
                     {
@@ -35,7 +35,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                             using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
                             {
                                 //Se obtienen los datos para cargar el gridview
-                                var misReserv = db.SpCosultarReservaciones().ToList();
+                                var misReserv = db.SpConsultarReservacionesExcluyendoId(idPersona);
 
                                 //Se cargan los datos en el gridview
                                 grdGestReserv.DataSource = misReserv;
@@ -67,9 +67,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             {
                 Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
-
         }
-
 
         //Función para validar el estado de la reservación
         protected string estadoReservacion(DateTime fechaEntrada, DateTime fechaSalida, string estadoCod)
@@ -100,12 +98,10 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 
             return estado;//Retorna el estado de la reservación
 
-
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (Page.IsValid)
@@ -120,11 +116,11 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 
                         DateTime fechaEntrada = DateTime.Parse(txtFechaEntrada.Text);
 
-                        DateTime fechaSalida =  DateTime.Parse(txtFechaSalida.Text);
+                        DateTime fechaSalida = DateTime.Parse(txtFechaSalida.Text);
 
                         //Sse obtienen los datos para cargar el gridview según los filtros administrados
                         misReservFilt = db.SpFiltrarReservaciones(idPersona, fechaEntrada, fechaSalida).ToList();
-                        
+
                         //Se cargan los datos en el gridview
                         grdGestReserv.DataSource = misReservFilt;
                         grdGestReserv.DataBind();
@@ -135,9 +131,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             catch
             {
 
-                
-            }
 
+            }
         }
 
         protected void cvFechaSalida_ServerValidate(object source, ServerValidateEventArgs args)

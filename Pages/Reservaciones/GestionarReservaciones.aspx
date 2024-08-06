@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestiornarReservaciones.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Reservaciones.GestiornarReservaciones" %>
+﻿<%@ Page Title="Gestionar Reservaciones" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarReservaciones.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Reservaciones.GestionarReservaciones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
@@ -47,6 +47,8 @@
             <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" OnServerValidate="cvFechaSalida_ServerValidate"></asp:CustomValidator>
 
         </div>
+
+
    
         <div class="m mt-4">
             <a href="CrearReservacion.aspx" class="btn btn-primary">Nueva Resevación</a>
@@ -56,16 +58,16 @@
             <asp:GridView ID="grdGestReserv" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered" CellPadding="10" >
                 <Columns>
                     <asp:BoundField DataField="idReservacion" HeaderText="# reservación" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center"/>
-                    <asp:BoundField DataField="cliente" HeaderText="Cliente" ItemStyle-CssClass="w-auto"/>
+                    <asp:BoundField DataField="cliente" HeaderText="Cliente" ItemStyle-CssClass="w-auto" />
                     <asp:BoundField DataField="nombreHotel" HeaderText="Hotel" ItemStyle-CssClass="w-auto"/>
-                    <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada" ItemStyle-CssClass="w-auto" DataFormatString="{0:dd/MM/yyyy}"/>
-                    <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" ItemStyle-CssClass="w-auto" DataFormatString="{0:dd/MM/yyyy}"/>
-                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" HeaderText="Costo">
+                    <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:TemplateField ItemStyle-CssClass="text-end w-auto" HeaderStyle-CssClass="text-end" HeaderText="Costo">
                         <ItemTemplate>
                             $<%# Decimal.Parse(Eval("costoTotal").ToString())%>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" HeaderText="Estado">
+                    <asp:TemplateField ItemStyle-CssClass="text-center w-auto" HeaderStyle-CssClass="text-center" HeaderText="Estado">
                         <ItemTemplate>
                             <%# estadoReservacion(DateTime.Parse(Eval("FechaEntrada").ToString()), DateTime.Parse(Eval("fechaSalida").ToString()), Eval("estado").ToString())%>
                         </ItemTemplate>

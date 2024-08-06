@@ -11,7 +11,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 {
 
 
-    public partial class GestiornarReservaciones
+    public partial class GestionarReservaciones
     {
 
         /// <summary>
