@@ -5,7 +5,7 @@
 
         <div class="mx-auto align-content-center text-center">
 
-            <div class="my-5 pb-4 bg-light ">
+            <div class="mx-auto my-5 pb-4 w-50 bg-light ">
                 <h2 class="text-bg-primary p-1">Inicio de Sesión</h2>
             
 

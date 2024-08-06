@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date" ></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaEntrada" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaSalida"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtFechaSalida" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" OnServerValidate="cvFechaSalida_ServerValidate"></asp:CustomValidator>
+            <asp:CustomValidator ID="cvFechaSalida" runat="server" ErrorMessage="La fecha de salida debe ser mayor o igual a la de entrada" ControlToValidate="txtFechaSalida" OnServerValidate="cvFechaSalida_ServerValidate" CssClass="text-danger"></asp:CustomValidator>
 
         </div>
 
@@ -72,9 +72,9 @@
                             <%# estadoReservacion(DateTime.Parse(Eval("FechaEntrada").ToString()), DateTime.Parse(Eval("fechaSalida").ToString()), Eval("estado").ToString())%>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" >
+                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto text-center" >
                         <ItemTemplate>
-                            <a href="Detalle.aspx?id=<%#Eval("idReservacion")%>" class="btn btn-light btn-outline-secondary">Consultar</a>
+                            <a href="Detalle.aspx?id=<%#Eval("idReservacion")%>" class="btn btn-light btn-outline-secondary ">Consultar</a>
                         </ItemTemplate>
                     </asp:TemplateField>
 

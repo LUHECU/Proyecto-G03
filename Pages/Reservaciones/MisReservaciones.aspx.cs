@@ -29,7 +29,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                         {
 
-                            var misReserv = db.SpCosultarReservacionesPorId(idPersona).ToList();
+                            var misReserv = db.SpCosultarReservacionesPorIdPersona(idPersona).ToList();
                             grdMisReserv.DataSource = misReserv;
                             grdMisReserv.DataBind();
                         }

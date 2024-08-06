@@ -50,7 +50,7 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
                         <li class="nav-item"  id="liGestionarHabitaciones" runat="server"><a class="nav-link" runat="server" href="~/Pages/Habitaciones/ListaHabitaciones.aspx">Gestionar Habitaciones</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Reservaciones/GestiornarReservaciones.aspx">Gestionar Reservaciones</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Reservaciones/GestionarReservaciones.aspx">Gestionar Reservaciones</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Reservaciones/MisReservaciones.aspx">Mis Reservaciones</a></li>
 
                     </ul>
@@ -60,7 +60,7 @@
                             <asp:Label ID="lblNombreCompleto" runat="server" Text="" Visible="false" CssClass="nav-link "></asp:Label>
                         </li>
                          <li class="nav-item ml-auto">
-                             <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesión" Visible="false" OnClick="btnCerrarSesion_Click" CssClass="btn btn-light btn-outline-secondary"/>
+                             <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesión" Visible="false" OnClick="btnCerrarSesion_Click" CausesValidation="false" CssClass="btn btn-light btn-outline-secondary"/>
                          </li>
 
                     </ul>

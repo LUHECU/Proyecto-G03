@@ -15,6 +15,15 @@ namespace ProyectoFinal_G03
     {
 
         /// <summary>
+        /// liGestionarHabitaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liGestionarHabitaciones;
+
+        /// <summary>
         /// lblNombreCompleto control.
         /// </summary>
         /// <remarks>

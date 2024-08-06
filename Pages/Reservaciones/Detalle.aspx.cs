@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using static LinqToDB.Common.Configuration;
 
 namespace ProyectoFinal_G03.Pages.Reservaciones
@@ -17,11 +18,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;//Se crea una conexión para asociar la base de datos
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (Session["usuario"] != null)
             {
+
                 try
                 {
 
@@ -50,6 +53,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 {
 
                                     //Se cargan los campos con la información obtenida
+                                    lblIdReservacion.Text = reservacion.IdReservacion.ToString();
                                     lblNumReserv.Text = reservacion.IdReservacion.ToString();
                                     lblHotel.Text = reservacion.NombreHotel.ToString();
                                     lblNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
@@ -75,6 +79,12 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         //Error
                                     }
 
+                                    if (reservacion.Estado.ToString() == "I" && reservacion.FechaSalida < DateTime.Now)
+                                    {
+                                        btnCancelarReserv.Visible = false;
+                                        btnEditarReserv.Visible = false;
+                                    }
+
                                 }
                                 else
                                 {
@@ -91,6 +101,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 {
 
                                     //Se cargan los campos con la información obtenida
+                                    lblIdReservacion.Text = reservacion.IdReservacion.ToString();
                                     lblNumReserv.Text = reservacion.IdReservacion.ToString();
                                     lblHotel.Text = reservacion.NombreHotel.ToString();
                                     lblNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
@@ -116,11 +127,17 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         //Error ID
                                     }
 
+                                    if(reservacion.Estado.ToString() == "I" && reservacion.FechaEntrada < DateTime.Now)
+                                    {
+                                        btnCancelarReserv.Visible = false;
+                                        btnEditarReserv.Visible = false;
+                                    }
+
 
                                 }
                                 else
                                 {
-                                    //ERROR DE ID
+                                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                                 }
                             }
 
@@ -135,15 +152,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 {
                     //ERROR
                 } 
+
+
             }
             else
             {
                 Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
-
-
-
-
 
         }
 
@@ -169,6 +184,28 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             }
 
 
+        }
+
+        protected void btnCancelarReserv_Click(object sender, EventArgs e)
+        {  
+
+            //Se crea y almacena el resultado de un massagebox
+            var msg = MessageBox.Show("¿Desea cancelar la reservación?", "Alerta", MessageBoxButtons.YesNo);
+
+            //Se obtiene el id de la reservación a editar
+            int idReserv = int.Parse(lblIdReservacion.Text); 
+
+            //Se obtiene el id del usuario
+            Usuario objUsuario = (Usuario)Session["usuario"];
+            int idPersona = objUsuario.idPersona;
+
+            if (msg == DialogResult.Yes)
+            {
+                using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                {
+                    db.SpCancelarReservacion(idReserv, idPersona);
+                }
+            }
         }
     }
 }

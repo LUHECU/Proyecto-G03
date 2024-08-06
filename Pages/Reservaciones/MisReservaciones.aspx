@@ -30,7 +30,7 @@
                             <%# estadoReservacion(DateTime.Parse(Eval("FechaEntrada").ToString()), DateTime.Parse(Eval("fechaSalida").ToString()), Eval("estado").ToString())%>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto" >
+                    <asp:TemplateField ItemStyle-CssClass="w-auto m-auto h-auto text-center" >
                         <ItemTemplate>
                             <a href="Detalle.aspx?id=<%# Eval("idReservacion")%>" class="btn btn-light btn-outline-secondary">Consultar</a>
                         </ItemTemplate>
