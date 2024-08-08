@@ -60,9 +60,9 @@
                             <asp:Label ID="lblNombreCompleto" runat="server" Text="" Visible="false" CssClass="nav-link "></asp:Label>
                         </li>
                          <li class="nav-item ml-auto">
-                             <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesión" Visible="false" OnClick="btnCerrarSesion_Click" CausesValidation="false" CssClass="btn btn-light btn-outline-secondary"/>
+                           <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesión" Visible="false" OnClick="btnCerrarSesion_Click" CausesValidation="false" CssClass="btn btn-light btn-outline-secondary"/>
                          </li>
-
+                     
                     </ul>
                 </div>
             </div>
