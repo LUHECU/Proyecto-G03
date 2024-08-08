@@ -55,7 +55,7 @@
              <div  class="mt-3 mb-3">
         <asp:Button ID="btnGuardar" runat="server" Text="Guardar" Cssclass="btn btn-primary" OnClick="btnGuardar_Click" />
         <!-- Enlace para cancelar y volver a la página principal -->
-        <a href="ListaHabitaciones.aspx" class="btn btn-info">Cancelar</a>
+        <a href="ListaHabitaciones.aspx" class="btn btn-info">Regresar</a>
         </div >
  
     </div>

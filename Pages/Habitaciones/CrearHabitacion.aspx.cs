@@ -1,5 +1,6 @@
 ﻿using DataModels;
 using LinqToDB;
+using ProyectoFinal_G03.Clases;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,54 +19,56 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] != null)//Se valida la sesión
+
+            if (Session["usuario"] != null) // Se valida la sesión
             {
-
-                if (Page.IsPostBack == false)
+                try
                 {
-                    try
+                    Usuario objUsuario = (Usuario)Session["usuario"]; // Se obtienen los datos de la sesión
+
+                    int idPersona = objUsuario.idPersona;
+
+                    if (objUsuario.esEmpleado) // Se comprueba si es un empleado
                     {
-                        var lista = new List<ListItem>();
-
-                        lista.Add(new ListItem("Seleccione un valor", "0"));
-                        //lista.Add(new ListItem("gatos"));
-
-                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        if (!Page.IsPostBack)
                         {
-                            var query = db.SpConsultarHoteles()
-                            .OrderBy(hotel => hotel.Nombre) // Ordena por el nombre del hotel
-                            .Select(S => new ListItem(S.Nombre, S.IdHotel.ToString()))
-                            .ToList();
+                            var lista = new List<ListItem>();
+                            lista.Add(new ListItem("Seleccione un hotel", "0"));
 
-                            lista.AddRange(query);
+
+                            using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                            {
+                                var query = db.SpConsultarHoteles()
+
+                                .Select(S => new ListItem(S.Nombre, S.IdHotel.ToString()));
+                                lista.AddRange(query);
+
+                                ddlHoteles.DataSource = lista;
+                                ddlHoteles.DataTextField = "Text";
+                                ddlHoteles.DataValueField = "Value";
+                                ddlHoteles.DataBind();
+                                //ddlHoteles.Items.FindByValue("0").Selected = true;
+                            }
                         }
-                        // Ordenar la lista usando LINQ
-                        var listaOrdenada = lista.OrderBy(item => item.Text).ToList();
-
-                        ddlHoteles.DataSource = lista;
-                        ddlHoteles.DataTextField = "Text";
-                        ddlHoteles.DataValueField = "Value";
-                        ddlHoteles.DataBind();
-
-
-                        ddlHoteles.Items.FindByValue("0").Selected = true;
-
                     }
-                    catch
+
+                    else // Si no es empleado, redirecciona a la página de error
                     {
                         Response.Redirect("~/Pages/Mensajes/Error.aspx");
                     }
-
-
                 }
-
-                else
+                catch
                 {
-                    Response.Redirect("../Reservaciones/Error");
+                    //Response.Redirect("~/Pages/Mensajes/Error.aspx");
                 }
-
             }
+            else
+            {
+                Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
+            }
+
         }
+        
 
 
             protected void btnGuardar_Click(object sender, EventArgs e)
@@ -82,13 +85,12 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     string numeroHabitacion = txtNumeroHabitacion.Text;
                     int capacidadMaxima = int.Parse(txtCapacidadMaxima.Text);
                     string descripcion = txtDescripcion.Text;
-                    char estado = 'A'; // Asignar 'I' directamente
+                    char estado = 'A'; 
                     int idHotel = int.Parse(id);
 
                     // Verificar que todos los campos de la habitación están completos
                     if (!string.IsNullOrEmpty(numeroHabitacion) &&
                         !string.IsNullOrEmpty(descripcion) &&
-                        //!string.IsNullOrEmpty(txtEstado.Text) && // Este campo es revisado, pero no se usa en la asignación
                         !string.IsNullOrEmpty(txtCapacidadMaxima.Text))
                     {
                      
@@ -109,16 +111,9 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2601 || ex.Number == 2627) // Número de error para duplicados
-                {
-                    // Redirige a la página de error específica para duplicado
-                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
-                }
-                else
-                {
-                    // Redirige a la página de error genérica para otros errores de base de datos
-                    Response.Redirect("~/Pages/Mensajes/Error.aspx");
-                }
+               //Mensaje para datos duplicados
+                    Response.Redirect("~/Pages/Mensajes/error.aspx");
+              
             }
             catch (Exception ex)
             {

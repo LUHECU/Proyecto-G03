@@ -44,7 +44,7 @@
 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" Cssclass="btn btn-primary" Onclick="btnGuardar_Click" />
 <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-danger" Onclick="btnInactivar_Click"/>
 <!-- Enlace para cancelar y volver a la página principal -->
-<a href="ListaHabitaciones.aspx" class="btn btn-info" >Cancelar</a>
+<a href="ListaHabitaciones.aspx" class="btn btn-info" >Regresar</a>
 </div >
 </div>
 

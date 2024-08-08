@@ -1,9 +1,11 @@
 ﻿using DataModels;
 using LinqToDB;
+using Microsoft.IdentityModel.Tokens;
 using ProyectoFinal_G03.Clases;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,16 +18,17 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {// Verificar si el usuario está autenticado y es un empleado
-                if (Session["usuario"] != null)
+            if (Session["usuario"] != null)//Se valida la sesión
+            {
+                try
                 {
-                    Usuario usuario = (Usuario)Session["usuario"];
+                    Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
 
-                    // Verificar si el usuario es un empleado
-                    if (usuario.esEmpleado)
+                    int idPersona = objUsuario.idPersona;
+
+                    if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
                     {
-                        if (IsPostBack == false)
+                        if (!Page.IsPostBack)
                         {
                             int id = int.Parse(Request.QueryString["id"]);
                             using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
@@ -49,66 +52,69 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     else
                     {
                         // Redirigir a una página de acceso denegado si el usuario no es un empleado
-                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                     }
                 }
-                else
+
+                catch
                 {
-                    // Redirigir a la página de login si no hay sesión activa
-                    Response.Redirect("~/Pages/Acceso/Login.aspx");
+                    // Manejo de errores
+                    Response.Redirect("../Mensajes/Error.aspx");
                 }
             }
-            catch
+            else
             {
-                // Manejo de errores
-                Response.Redirect("../Mensajes/Error.aspx");
+                Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
-        }
+            }
 
-            protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
+            if (Page.IsValid == true)
             {
-                int idHotel = int.Parse(Request.QueryString["idHotel"]);
-                int id = int.Parse(Request.QueryString["id"]);
-                string numeroHabitacion = txtNumeroHabitacion.Text;
-                int capacidadMaxima = int.Parse(txtCapacidadMaxima.Text);
-                string descripcion = txtDescripcion.Text;
-                char estado = 'A';
-
-                if (string.IsNullOrEmpty(numeroHabitacion) ||
-                    string.IsNullOrEmpty(descripcion) ||
-                    string.IsNullOrEmpty(txtCapacidadMaxima.Text))
+                try
                 {
-                    // Redirige a la página de error si hay campos vacíos
-                    Response.Redirect("../Mensajes/Error.aspx?mensaje=Todos los campos son obligatorios.");
-                    return;
-                }
+                    int idHotel = int.Parse(Request.QueryString["idHotel"]);
+                    int id = int.Parse(Request.QueryString["id"]);
+                    string numeroHabitacion = txtNumeroHabitacion.Text;
+                    int capacidadMaxima = int.Parse(txtCapacidadMaxima.Text);
+                    string descripcion = txtDescripcion.Text;
+                    char estado = 'A';
 
-                using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
-                {
-                    // Verifica si el número de habitación ya existe
-                    bool existeHabitacion = db.Habitacions
-                        .Any(h => h.NumeroHabitacion == numeroHabitacion && h.IdHabitacion != id);
-
-                    if (existeHabitacion)
+                    if (!string.IsNullOrEmpty(numeroHabitacion) &&
+                        !string.IsNullOrEmpty(descripcion) &&
+                        capacidadMaxima > 0)
                     {
-                        // Redirige a la página de error si el número de habitación ya existe
-                        Response.Redirect("../Mensajes/Error.aspx?mensaje=El número de habitación ya existe.");
-                        return;
+
+
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        {
+                            // Si no existe, procede a actualizar la habitación
+                            db.SpEditarHabitacion(id, idHotel, numeroHabitacion, capacidadMaxima, descripcion, estado);
+                        }
+                       
                     }
-
-                    // Si no existe, procede a actualizar la habitación
-                    db.SpEditarHabitacion(id, idHotel, numeroHabitacion, capacidadMaxima, descripcion, estado);
+                    else
+                    {
+                        //Campos vacios
+                        Response.Redirect("../Mensajes/Error.aspx");
+                    }
                 }
+                catch (SqlException ex)
+                {
+                    //campos duplicados
+                    Response.Redirect("~/Pages/Mensajes/error.aspx");
 
-                // Redirige a la página de confirmación solo si todo salió bien
-                Response.Redirect("../Mensajes/Confirmacion.aspx");
-            }
-            catch (Exception ex)
-            {
-                // Redirige a la página de error con el mensaje de excepción general
-                Response.Redirect($"../Mensajes/Error.aspx?mensaje=Ocurrió un error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+
+                    Response.Redirect("../Mensajes/Error.aspx");
+                }
+               
+                    Response.Redirect("../Mensajes/Confirmacion.aspx");
+                
+
             }
         }
 
