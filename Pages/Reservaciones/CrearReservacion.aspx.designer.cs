@@ -15,6 +15,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
     {
 
         /// <summary>
+        /// vsFechas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsFechas;
+
+        /// <summary>
         /// lblHotel control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlHotel;
+
+        /// <summary>
+        /// rfvHotel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHotel;
 
         /// <summary>
         /// lblPersona control.
@@ -51,6 +69,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.DropDownList ddlPersona;
 
         /// <summary>
+        /// rfvPersona control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPersona;
+
+        /// <summary>
         /// lblFechaEntrada control.
         /// </summary>
         /// <remarks>
@@ -67,6 +94,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaEntrada;
+
+        /// <summary>
+        /// cvFechaEntrada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaEntrada;
 
         /// <summary>
         /// lblFechaSalida control.
@@ -87,6 +123,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtFechaSalida;
 
         /// <summary>
+        /// cvFechaSalida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaSalida;
+
+        /// <summary>
         /// lblNumAdultos control.
         /// </summary>
         /// <remarks>
@@ -105,6 +150,24 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtNumAdultos;
 
         /// <summary>
+        /// rfvNumAdultos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumAdultos;
+
+        /// <summary>
+        /// rvNumeroAdultos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvNumeroAdultos;
+
+        /// <summary>
         /// lblNumNinhos control.
         /// </summary>
         /// <remarks>
@@ -121,6 +184,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumNinhos;
+
+        /// <summary>
+        /// rvNumeroNinhos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvNumeroNinhos;
 
         /// <summary>
         /// btnGuardar control.
