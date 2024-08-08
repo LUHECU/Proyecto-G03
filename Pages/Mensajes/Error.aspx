@@ -1,10 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Error.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Mensajes.Error" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-        <div class="alert alert-danger">
-   Ha ocurrido un error Con su solicitud.
-</div>
+    <div>
 
-<a class="btn btn-danger" href="../Habitaciones/ListaHabitaciones.aspx" >Regresar</a>
+        <div>
+            <h2>Ha surgido un error</h2>
+        </div>
+
+        <div class="alert alert-danger">
+            <asp:Label ID="lblMensajeError" runat="server" Text=""></asp:Label>
+        </div>
+
+        <div class="mt-3">
+            <a class="btn btn-light btn-outline-secondary" href="ListaPersonas.aspx">Regresar</a>
+        </div>
+
+    </div>
 
 </asp:Content>
