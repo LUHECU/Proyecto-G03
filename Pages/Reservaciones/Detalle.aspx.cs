@@ -41,12 +41,12 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                     
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                         {
-                            
+
                             //Se verifica el empleado
                             if (esEmpleado)
                             {
                                 //Se obtienen los datos de la reservación seleccionada
-                                 var reservacion = db.SpCosultarReservacionesPorId(idReserv).FirstOrDefault();
+                                var reservacion = db.SpCosultarReservacionesPorId(idReserv).FirstOrDefault();
 
                                 //Se comprueba si los datos son nulos
                                 if (reservacion != null)
@@ -79,10 +79,10 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         //Error
                                     }
 
-                                    if (reservacion.Estado.ToString() == "I" && reservacion.FechaSalida < DateTime.Now)
+                                    if (reservacion.Estado.ToString() == "A" && reservacion.FechaEntrada > DateTime.Now)
                                     {
-                                        btnCancelarReserv.Visible = false;
-                                        btnEditarReserv.Visible = false;
+                                        btnCancelarReserv.Visible = true;
+                                        btnEditarReserv.Visible = true;
                                     }
 
                                 }
@@ -127,12 +127,11 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         //Error ID
                                     }
 
-                                    if(reservacion.Estado.ToString() == "I" && reservacion.FechaEntrada < DateTime.Now)
+                                    if (reservacion.Estado.ToString() == "A" && reservacion.FechaEntrada > DateTime.Now)
                                     {
-                                        btnCancelarReserv.Visible = false;
-                                        btnEditarReserv.Visible = false;
+                                        btnCancelarReserv.Visible = true;
+                                        btnEditarReserv.Visible = true;
                                     }
-
 
                                 }
                                 else
@@ -187,25 +186,47 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         }
 
         protected void btnCancelarReserv_Click(object sender, EventArgs e)
-        {  
+        {
+            phAlerta.Visible = true;
+            pnlContenido.Style["pointer-events"] = "none";
+            pnlContenido.Style["opacity"] = "0.5";
 
-            //Se crea y almacena el resultado de un massagebox
-            var msg = MessageBox.Show("¿Desea cancelar la reservación?", "Alerta", MessageBoxButtons.YesNo);
 
-            //Se obtiene el id de la reservación a editar
-            int idReserv = int.Parse(lblIdReservacion.Text); 
+        }
 
-            //Se obtiene el id del usuario
-            Usuario objUsuario = (Usuario)Session["usuario"];
-            int idPersona = objUsuario.idPersona;
+        protected void btnConfirmar_Click(object sender, EventArgs e)
+        {
 
-            if (msg == DialogResult.Yes)
+            try
             {
+                //Se obtiene el id de la reservación a editar
+                int idReserv = int.Parse(lblIdReservacion.Text);
+
+                //Se obtiene el id del usuario
+                Usuario objUsuario = (Usuario)Session["usuario"];
+                int idPersona = objUsuario.idPersona;
+
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                 {
                     db.SpCancelarReservacion(idReserv, idPersona);
                 }
             }
+            catch
+            {
+
+            }
+            finally 
+            {
+                Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=2");
+            }
+            
+        }
+
+        protected void btnNoConfirmar_Click(object sender, EventArgs e)
+        {
+            phAlerta.Visible = false;
+            pnlContenido.Style["pointer-events"] = "auto";
+            pnlContenido.Style["opacity"] = "1";
         }
     }
 }

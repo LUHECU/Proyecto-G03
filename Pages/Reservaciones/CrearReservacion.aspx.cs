@@ -1,5 +1,6 @@
 ﻿using DataModels;
 using LinqToDB;
+using ProyectoFinal_G03.Clases;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,6 +26,10 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 {
                     try
                     {
+                        Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
+                        int idUsuario = objUsuario.idPersona;
+                        bool esEmpleado = objUsuario.esEmpleado;
+
                         var listaPersonas = new List<ListItem>();//Creación de una lista para personas
                         listaPersonas.Add(new ListItem("Selecione un cliente", ""));//Valor inicial de la lista
 
@@ -43,6 +48,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                             ddlPersona.DataTextField = "Text";
                             ddlPersona.DataValueField = "Value";
                             ddlPersona.DataBind();
+
+                            //Se carga un ddl con el nombre del usuario en caso de que este sea cliente
+                            if (!esEmpleado) 
+                            { 
+                                ddlPersona.Enabled = false;
+                                ddlPersona.SelectedValue = idUsuario.ToString();
+                            }
 
 
                             //Se obtienen los datos para cargar el dropdownlist hoteles
@@ -122,10 +134,79 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             {
                 try
                 {
+                    Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
+                    int idUsuario = objUsuario.idPersona;
+
+                    int idReservacion = 0;
+                    int idHotel = int.Parse(ddlHotel.SelectedValue);
+                    int idPersona = int.Parse(ddlPersona.SelectedValue);
+                    int numNinhos = int.Parse(txtNumNinhos.Text == null || txtNumNinhos.Text.Equals("") ? "0" : txtNumNinhos.Text);
+                    int numAdultos = int.Parse(txtNumAdultos.Text);
+                    int totalPersonas = numAdultos + numNinhos;
+                    DateTime fechaEntrada = DateTime.Parse(txtFechaEntrada.Text);
+                    DateTime fechaSalida = DateTime.Parse(txtFechaSalida.Text);
+
+
+
+                    using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
+                    {
+                        var vefHabActivas = db.SpVerificarHabitacionesActivas(totalPersonas, idHotel).FirstOrDefault();
+
+                        if (vefHabActivas != null)
+                        {
+                            var vefCapHabitaciones = db.SpVerificarCapacidadHabitaciones(totalPersonas, idHotel).FirstOrDefault();
+                            if (vefCapHabitaciones != null)
+                            {
+                                var obtHabitacion = db.SpObtenerHabitacion(totalPersonas, idHotel).FirstOrDefault();
+                                if (obtHabitacion != null)
+                                {
+                                    int idHabitacion = int.Parse(obtHabitacion.IdHabitacion.ToString());
+
+                                    db.SpCrearReservacion(idPersona, idHotel, idHabitacion, fechaEntrada, fechaSalida, numNinhos, numAdultos);
+
+                                    var ultimaReservCreada = db.SpObtenerUltimoIdReservacion().FirstOrDefault();
+
+                                    idReservacion = int.Parse(ultimaReservCreada.UltimoIdReservacion.ToString());
+
+                                    db.SpRegistrarBitacora(idUsuario, idReservacion, "CREADA");
+
+                                    Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=0");
+
+                                }
+                                else
+                                {
+                                    //Error
+                                }
+
+
+                            }
+                            else
+                            {
+                                //Error capacida maxima excedida
+                                var ObtCapMaxHabitaciones = db.SpObtenerCapacidadHabitaciones(idHotel).FirstOrDefault();
+                                int capacidadMaxima = int.Parse(ObtCapMaxHabitaciones.HabConCapMaxima.ToString());
+                                phAlerta.Visible = true;
+                                pnlContenido.Style["pointer-events"] = "none";
+                                pnlContenido.Style["opacity"] = "0.5";
+                                lblMsg.Text = "La habitación con la mayor capacidad solo admite " + capacidadMaxima + " personas, debe disminuir el número de personas de la reservación";
+                            }
+
+                        }
+                        else
+                        {
+                            //Error no hay habitaciones activas
+                        }
+                    }
                 }
                 catch { }
-                finally { }
             }
+        }
+
+        protected void btnContinuar_Click(object sender, EventArgs e)
+        {
+            phAlerta.Visible = false;
+            pnlContenido.Style["pointer-events"] = "auto";
+            pnlContenido.Style["opacity"] = "1";
         }
     }
 }

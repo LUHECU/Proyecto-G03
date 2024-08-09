@@ -12,11 +12,13 @@ namespace ProyectoFinal_G03.Pages.Mensajes
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //Se obtiene el código de éxito
-            int msg = int.Parse(Request.QueryString["msgError"]);
+            //Se valida y obtiene el código de éxito
+            int msgCod;
+            bool msg = int.TryParse(Request.QueryString["msg"], out msgCod);
+            msgCod = msg == true ? int.Parse(Request.QueryString["msg"]) : 400;
 
-            //Se valida el código de éxito
-            switch (msg)
+            //Se valida el código de éxitos
+            switch (msgCod)
             {
                 case 0:
                     lblMensajeError.Text = "";

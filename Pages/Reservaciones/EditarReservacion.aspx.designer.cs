@@ -15,6 +15,33 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
     {
 
         /// <summary>
+        /// pnlContenido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlContenido;
+
+        /// <summary>
+        /// vsFechas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsFechas;
+
+        /// <summary>
+        /// txtIdReservacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIdReservacion;
+
+        /// <summary>
         /// lblHotel control.
         /// </summary>
         /// <remarks>
@@ -31,6 +58,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHotel;
+
+        /// <summary>
+        /// txtIdHotel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIdHotel;
 
         /// <summary>
         /// lblNumHabitacion control.
@@ -51,22 +87,40 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtNumHabitacion;
 
         /// <summary>
-        /// lblCliente control.
+        /// txtIdHabitacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtIdHabitacion;
 
         /// <summary>
-        /// txtCliente control.
+        /// lblPersona control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCliente;
+        protected global::System.Web.UI.WebControls.Label lblPersona;
+
+        /// <summary>
+        /// txtPersona control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPersona;
+
+        /// <summary>
+        /// txtIdPersona control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIdPersona;
 
         /// <summary>
         /// lblFechaEntrada control.
@@ -87,6 +141,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtFechaEntrada;
 
         /// <summary>
+        /// cvFechaEntrada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaEntrada;
+
+        /// <summary>
         /// lblFechaSalida control.
         /// </summary>
         /// <remarks>
@@ -105,13 +168,22 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtFechaSalida;
 
         /// <summary>
-        /// lblAdultos control.
+        /// cvFechaSalida control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAdultos;
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaSalida;
+
+        /// <summary>
+        /// lblNumAdultos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumAdultos;
 
         /// <summary>
         /// txtNumAdultos control.
@@ -123,13 +195,31 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtNumAdultos;
 
         /// <summary>
-        /// lblNinhos control.
+        /// rfvNumAdultos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNinhos;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumAdultos;
+
+        /// <summary>
+        /// rvNumeroAdultos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvNumeroAdultos;
+
+        /// <summary>
+        /// lblNumNinhos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumNinhos;
 
         /// <summary>
         /// txtNumNinhos control.
@@ -141,6 +231,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.TextBox txtNumNinhos;
 
         /// <summary>
+        /// rvNumeroNinhos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvNumeroNinhos;
+
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>
@@ -150,12 +249,30 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         protected global::System.Web.UI.WebControls.Button btnGuardar;
 
         /// <summary>
-        /// btnRegresar control.
+        /// phAlerta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegresar;
+        protected global::System.Web.UI.WebControls.PlaceHolder phAlerta;
+
+        /// <summary>
+        /// lblMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsg;
+
+        /// <summary>
+        /// btnContinuar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnContinuar;
     }
 }
