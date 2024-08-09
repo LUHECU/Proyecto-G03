@@ -12,11 +12,13 @@ namespace ProyectoFinal_G03.Pages.Mensajes
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //Se obtiene el código de éxito
-            int msg = int.Parse(Request.QueryString["msg"]);
+            //Se valida y obtiene el código de éxito
+            int msgCod;
+            bool msg = int.TryParse(Request.QueryString["msg"], out msgCod);
+            msgCod = msg == true? int.Parse(Request.QueryString["msg"]) : 400;
 
             //Se valida el código de éxito
-            switch (msg) 
+            switch (msgCod) 
             {
                 case 0:
                     lblMensaje.Text = "Ha registrado correctamente una nueva reservación";
@@ -25,7 +27,7 @@ namespace ProyectoFinal_G03.Pages.Mensajes
                     lblMensaje.Text = "Ha modificado correctamente una reservación";
                     break;
                 case 2:
-                    lblMensaje.Text = "Ha cancelado correctamente una reserva";
+                    lblMensaje.Text = "Ha cancelado correctamente una reservación";
                     break;
                 case 3:
                     lblMensaje.Text = "Ha registrado correctamente una nueva habitación";
