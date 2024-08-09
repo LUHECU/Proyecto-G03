@@ -47,19 +47,22 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                 ddlHoteles.DataTextField = "Text";
                                 ddlHoteles.DataValueField = "Value";
                                 ddlHoteles.DataBind();
-                                //ddlHoteles.Items.FindByValue("0").Selected = true;
+                              
+                               
                             }
+                           
                         }
+                        
                     }
 
-                    else // Si no es empleado, redirecciona a la página de error
+                    else // Si no es empleado,
                     {
-                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                     }
                 }
                 catch
                 {
-                    //Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                 
                 }
             }
             else

@@ -18,47 +18,65 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] != null)//Se valida la sesión
+            if (Session["usuario"] != null)
             {
                 try
                 {
-                    Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
+                    Usuario objUsuario = (Usuario)Session["usuario"];
 
-                    int idPersona = objUsuario.idPersona;
+                    // Verifica si el usuario es un empleado
 
-                    if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
+                    if (objUsuario.esEmpleado)
                     {
                         if (!Page.IsPostBack)
                         {
+                            // Obtiene el ID de la habitación de la cadena de consulta (QueryString)
                             int id = int.Parse(Request.QueryString["id"]);
                             using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                             {
-                                var habitaciones = db.ConsultarHabitacionesPorID(id).FirstOrDefault();
+                                // Consulta la habitación por su ID
+                                var habitacion = db.ConsultarHabitacionesPorID(id).FirstOrDefault();
 
-                                if (habitaciones != null)
+                                // Verifica si la habitación existe
+                                if (habitacion != null)
                                 {
-                                    txtIdhotel.Text = habitaciones.Nombre;
-                                    txtNumeroHabitacion.Text = habitaciones.NumeroHabitacion;
-                                    txtCapacidadMaxima.Text = habitaciones.CapacidadMaxima.ToString();
-                                    txtDescripcion.Text = habitaciones.Descripcion;
+                                    // Verifica si la habitación está inactiva
+                                    if (habitacion.Estado == 'I')
+                                    {
+                                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                                    }
+
+                                    // Verifica si tiene reservaciones activas
+                                    var reservaciones = db.Reservacions.Where(r => r.IdHabitacion == id &&
+                                                r.Estado == 'A' &&
+                                                r.FechaSalida > DateTime.Now).ToList();
+
+                                    // Si existen reservaciones activas, redirige a la página de error
+                                    if (reservaciones.Count > 0)
+                                    { //mensaje estado
+                                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                                    }
+                                    // Asigna los valores de la habitación a los controles de la página
+                                    txtIdhotel.Text = habitacion.Nombre;
+                                    txtNumeroHabitacion.Text = habitacion.NumeroHabitacion;
+                                    txtCapacidadMaxima.Text = habitacion.CapacidadMaxima.ToString();
+                                    txtDescripcion.Text = habitacion.Descripcion;
                                 }
                                 else
                                 {
-                                    Response.Redirect("../Mensajes/Error.aspx");
+                                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                                 }
                             }
                         }
                     }
                     else
                     {
-                        // Redirigir a una página de acceso denegado si el usuario no es un empleado
+                        // Si el usuario no es un empleado, redirige a la página "Mis Reservaciones"
                         Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                     }
                 }
-
                 catch
                 {
-                    // Manejo de errores
                     Response.Redirect("../Mensajes/Error.aspx");
                 }
             }
@@ -66,7 +84,8 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             {
                 Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
-            }
+        
+    }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
