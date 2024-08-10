@@ -36,7 +36,7 @@ namespace ProyectoFinal_G03.Pages.Mensajes
                     lblMensaje.Text = "¡La edición de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 case 5:
-                    lblMensaje.Text = "¡La cancelación de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    lblMensaje.Text = "¡La inactivación de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 default:
                     Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx");

@@ -176,7 +176,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 }
                                 else
                                 {
-                                    //Error
+                                    //Error al obtener la habitación con la capacidad solicitada y menor reservaciones
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=8");
                                 }
 
 
@@ -196,10 +197,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                         else
                         {
                             //Error no hay habitaciones activas
+                            Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=9");
                         }
                     }
                 }
-                catch { }
+                catch 
+                {
+                    //Error al insertart en la base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=5");
+                }
             }
         }
 

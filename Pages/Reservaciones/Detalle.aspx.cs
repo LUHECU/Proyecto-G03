@@ -121,10 +121,6 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         grdBitacora.DataSource = bitacora;
                                         grdBitacora.DataBind();
                                     }
-                                    else
-                                    {
-                                        //Error ID
-                                    }
 
                                     if (reservacion.Estado.ToString() == "A" && reservacion.FechaEntrada > DateTime.Now)
                                     {
@@ -208,7 +204,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             }
             catch
             {
-
+                //Error al consultar la base de datos
+                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
             }
             finally 
             {

@@ -74,7 +74,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 }
                                 else
                                 {
-                                    //Error al consultar la base de datos
+                                    //Error al consultar la base de datos por id
                                     Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
                                 }
                             }
@@ -115,7 +115,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 }
                                 else
                                 {
-                                    //Error al consultar la base de datos
+                                    //Error al consultar la base de datos por id
                                     Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
                                 }
 
@@ -186,8 +186,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 }
                 catch 
                 {
-                    //Error al consultar la base de datos
-                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
+                    //Error al editar la base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=6");
                 }
             }
         }
