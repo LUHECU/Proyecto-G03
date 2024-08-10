@@ -12,7 +12,7 @@
         </div>
 
         <div class="mt-3">
-            <a class="btn btn-light btn-outline-secondary" href="ListaPersonas.aspx">Regresar</a>
+            <a class="btn btn-light btn-outline-secondary" href="../Reservaciones/GestionarReservaciones.aspx">Regresar</a>
         </div>
 
     </div>
