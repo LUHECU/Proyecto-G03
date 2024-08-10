@@ -9,7 +9,7 @@
             </div>
 
             <div >
-                <asp:ValidationSummary ID="vsFechas" runat="server" DisplayMode="BulletList" HeaderText="Error al guardar" class="alert alert-danger tras"/>
+                <asp:ValidationSummary ID="vsGeneral" runat="server" DisplayMode="BulletList" HeaderText="Error al editar" class="alert alert-danger tras"/>
             </div>
 
 

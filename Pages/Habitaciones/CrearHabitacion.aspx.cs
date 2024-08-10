@@ -35,7 +35,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                         if (!Page.IsPostBack)
                         {
                             var lista = new List<ListItem>();
-                            lista.Add(new ListItem("Seleccione un hotel", "0"));
+                            lista.Add(new ListItem("Seleccione un hotel", ""));
 
 
                             using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))

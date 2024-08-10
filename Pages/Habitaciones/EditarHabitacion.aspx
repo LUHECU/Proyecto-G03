@@ -7,6 +7,11 @@
 <div class="mt-4 mb-4"> 
 <h1>Agregar habitación</h1>
 </div>
+
+<div >
+<asp:ValidationSummary ID="vsGeneral" runat="server" DisplayMode="BulletList" HeaderText="Error al editar" class="alert alert-danger tras"/>
+</div>
+
 <div>
 <div>
 <asp:Label ID="lblHabitacion" runat="server" Text="Hotel" ></asp:Label>

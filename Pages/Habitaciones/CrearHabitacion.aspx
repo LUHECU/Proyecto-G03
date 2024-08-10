@@ -8,6 +8,10 @@
         <div class="mt-3 mb-3"> 
         <h1>Agregar habitación</h1>
         </div>
+
+        <div >
+            <asp:ValidationSummary ID="vsGeneral" runat="server" DisplayMode="BulletList" HeaderText="Error al guardar" class="alert alert-danger tras"/>
+        </div>
  
                     <div>
         <div>
@@ -15,7 +19,7 @@
         </div>
  
         <div>
-        <asp:DropDownList ID="ddlHoteles" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+        <asp:DropDownList ID="ddlHoteles" runat="server" CssClass="form-control"></asp:DropDownList>
         <asp:RequiredFieldValidator ID="rfvHotel" runat="server" ControlToValidate="ddlHoteles" InitialValue="" ErrorMessage="Seleccione un hotel" CssClass="text-danger" />
         </div>
  
