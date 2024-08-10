@@ -254,6 +254,21 @@ namespace DataModels
 
 		#endregion
 
+		#region SpCancelarReservacion
+
+		public static int SpCancelarReservacion(this PvProyectoFinalDB dataConnection, int? @idReservacion, int? @idPersona)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idReservacion", @idReservacion, LinqToDB.DataType.Int32),
+				new DataParameter("@idPersona",     @idPersona,     LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[SpCancelarReservacion]", parameters);
+		}
+
+		#endregion
+
 		#region SpConsultarBitacoras
 
 		public static IEnumerable<Bitacora> SpConsultarBitacoras(this PvProyectoFinalDB dataConnection)
@@ -821,6 +836,32 @@ namespace DataModels
 		public static int SpUpgraddiagrams(this PvProyectoFinalDB dataConnection)
 		{
 			return dataConnection.ExecuteProc("[dbo].[sp_upgraddiagrams]");
+		}
+
+		#endregion
+
+		#region SpVerificarReservacionesEstado
+
+		public static IEnumerable<SpVerificarReservacionesEstadoResult> SpVerificarReservacionesEstado(this PvProyectoFinalDB dataConnection, int? @idHabitacion)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idHabitacion", @idHabitacion, LinqToDB.DataType.Int32)
+			};
+
+			var ms = dataConnection.MappingSchema;
+
+			return dataConnection.QueryProc(dataReader =>
+				new SpVerificarReservacionesEstadoResult
+				{
+					Column1 = Converter.ChangeTypeTo<int?>(dataReader.GetValue(0), ms),
+				},
+				"[dbo].[sp_VerificarReservacionesEstado]", parameters);
+		}
+
+		public partial class SpVerificarReservacionesEstadoResult
+		{
+			[Column("")] public int? Column1 { get; set; }
 		}
 
 		#endregion

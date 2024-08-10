@@ -18,41 +18,43 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         string conn = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (Session["usuario"] != null)//Se valida la sesión
             {
-                // Verificar si el usuario está autenticado y es un empleado
-                if (Session["usuario"] != null)
+                try
                 {
-                    Usuario usuario = (Usuario)Session["usuario"];
+                    Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
 
-                    // Verificar si el usuario es un empleado
-                    if (usuario.esEmpleado)
+                    int idPersona = objUsuario.idPersona;
+                    if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
                     {
-                        // Usar 'using' para construir la conexión
-                        using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                        if (!Page.IsPostBack)
                         {
-                            var lista = db.SpConsultarHabitaciones().ToList();
-                            grdHabitaciones.DataSource = lista;
-                            grdHabitaciones.DataBind();
+                            using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
+                            {
+                                var lista = db.SpConsultarHabitaciones().ToList();
+                                grdHabitaciones.DataSource = lista;
+                                grdHabitaciones.DataBind();
+                            }
+
                         }
                     }
-                    else
+
+                    else//Si es cliente, redireciona a la página de mis reservaciones
                     {
-                        // Si no es empleado, redirigir a una página de error o de acceso denegado
-                        Response.Redirect("~/Pages/Mensajes/AccesoDenegado.aspx");
+                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                     }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    // Si no hay sesión activa, redirigir al usuario a la página de login
-                    Response.Redirect("~/Pages/Acceso/Login.aspx");
+                  
                 }
             }
-            catch (Exception ex)
+            else
             {
-                // Manejo de errores
-                Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
+           
         }
     }
 }
