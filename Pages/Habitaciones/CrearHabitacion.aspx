@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CrearHabitacion.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Habitaciones.CrearHabitacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
+   
     <div class="container">
         <div>
         </div>
@@ -53,12 +53,15 @@
         <%--Botenes--%>
  
              <div  class="mt-3 mb-3">
-        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" Cssclass="btn btn-primary" OnClick="btnGuardar_Click" />
+        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" Cssclass="btn btn-success" OnClick="btnGuardar_Click" />
         <!-- Enlace para cancelar y volver a la página principal -->
-        <a href="ListaHabitaciones.aspx" class="btn btn-info">Regresar</a>
+        <a href="ListaHabitaciones.aspx" class="btn btn-light btn-outline-secondary">Regresar</a>
         </div >
  
     </div>
+    
+
+    
 
 
 </asp:Content>

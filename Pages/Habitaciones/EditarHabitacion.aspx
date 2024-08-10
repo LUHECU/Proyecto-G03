@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarHabitacion.aspx.cs" Inherits="ProyectoFinal_G03.Pages.Habitaciones.EditarHabitacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Panel ID="pnlContenido"  runat="server">
     <div class="container">
 <div>
 </div>
@@ -41,11 +42,24 @@
 
 <%--Botenes--%>
 <div  class="mt-4 mb-4">
-<asp:Button ID="btnGuardar" runat="server" Text="Guardar" Cssclass="btn btn-primary" Onclick="btnGuardar_Click" />
+<asp:Button ID="btnGuardar" runat="server" Text="Guardar" Cssclass="btn btn-success" Onclick="btnGuardar_Click" />
 <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-danger" Onclick="btnInactivar_Click"/>
 <!-- Enlace para cancelar y volver a la página principal -->
-<a href="ListaHabitaciones.aspx" class="btn btn-info" >Regresar</a>
+<a href="ListaHabitaciones.aspx" class="btn btn-light btn-outline-secondary" >Regresar</a>
 </div >
 </div>
+
+
+     </asp:Panel>
+<asp:PlaceHolder ID="phAlerta" runat="server" Visible="false">
+  <div class="card text-center position-fixed" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 18rem;">
+     <div class="card-body">
+         <h5 class="card-title text-danger">Alerta</h5>
+         <p class="card-text ">¿Desea inactivar la habitación?</p>
+         <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar" CssClass="card-link btn btn-danger" OnClick="btnConfirmar_Click"/>
+         <asp:Button ID="btnNoConfirmar" runat="server" Text="Regresar"  CssClass="card-link btn btn-light btn-outline-secondary" OnClick="btnNoConfirmar_Click"/>
+     </div>
+ </div>
+    </asp:PlaceHolder>
 
 </asp:Content>

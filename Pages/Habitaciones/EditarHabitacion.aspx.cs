@@ -64,7 +64,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                 }
                                 else
                                 { //id
-                                    Response.Redirect("~/Pages/Reservaciones/Eror.aspx?msg=4");
+                                    Response.Redirect("~/Pages/Reservaciones/Error.aspx?msg=4");
                                 }
                             }
                         }
@@ -131,6 +131,20 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 
 
         protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            phAlerta.Visible = true;
+            pnlContenido.Style["pointer-events"] = "none";
+            pnlContenido.Style["opacity"] = "0.5";
+        }
+
+        protected void btnNoConfirmar_Click(object sender, EventArgs e)
+        {
+            phAlerta.Visible = false;
+            pnlContenido.Style["pointer-events"] = "auto";
+            pnlContenido.Style["opacity"] = "1";
+        }
+
+        protected void btnConfirmar_Click(object sender, EventArgs e)
         {
             try
             {

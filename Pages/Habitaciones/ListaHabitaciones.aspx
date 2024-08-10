@@ -11,7 +11,7 @@
 
                 <div class="m my-3">
 
-                    <a href="CrearHabitacion.aspx" class="btn btn-info">Agregar habitación</a>
+                    <a href="CrearHabitacion.aspx" class="btn btn-primary">Agregar habitación</a>
 
                 </div>
  
@@ -54,8 +54,9 @@
                         <asp:TemplateField>
                             <ItemTemplate>
                         <%# Eval("estado").ToString() == "A" 
-                            ? $"<a href='EditarHabitacion.aspx?id={Eval("idHabitacion")}&idHotel={Eval("idHotel")}' class='btn btn-secondary'>Modificar</a>"
+                            ? $"<a href='EditarHabitacion.aspx?id={Eval("idHabitacion")}&idHotel={Eval("idHotel")}' class='btn btn-light btn-outline-secondary'>Modificar</a>"
                             : "<a href='#' class='btn btn-secondary disabled'>Modificar</a>" %>
+
                         </ItemTemplate>
 
                         </asp:TemplateField>
