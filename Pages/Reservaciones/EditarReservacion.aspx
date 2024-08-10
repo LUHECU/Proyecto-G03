@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="col col-sm-2 col-md-2 col-lg-1 my-1">
-                    <a href="GestionarReservaciones.aspx" class="btn btn-primary">Regresar</a>
+                    <a href="GestionarReservaciones.aspx" class="btn btn-light btn-outline-secondary">Regresar</a>
                 </div>
 
             </div>
