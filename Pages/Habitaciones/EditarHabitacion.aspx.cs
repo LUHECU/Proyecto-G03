@@ -20,15 +20,16 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         {
             if (Session["usuario"] != null)
             {
-                try
+
+                Usuario objUsuario = (Usuario)Session["usuario"];
+
+                // Verifica si el usuario es un empleado
+
+                if (objUsuario.esEmpleado)
                 {
-                    Usuario objUsuario = (Usuario)Session["usuario"];
-
-                    // Verifica si el usuario es un empleado
-
-                    if (objUsuario.esEmpleado)
+                    if (!Page.IsPostBack)
                     {
-                        if (!Page.IsPostBack)
+                        try
                         {
                             // Obtiene el ID de la habitación de la cadena de consulta (QueryString)
                             int id = int.Parse(Request.QueryString["id"]);
@@ -43,7 +44,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                     // Verifica si la habitación está inactiva
                                     if (habitacion.Estado == 'I')
                                     {
-                                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=3");
+                                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=3", false);
                                     }
 
                                     // Verifica si tiene reservaciones activas
@@ -54,7 +55,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                     // Si existen reservaciones activas, redirige a la página de error
                                     if (reservaciones.Count > 0)
                                     { //mensaje estado
-                                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=2");
+                                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=2", false);
                                     }
                                     // Asigna los valores de la habitación a los controles de la página
                                     txtIdhotel.Text = habitacion.Nombre;
@@ -64,28 +65,30 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                 }
                                 else
                                 { //id
-                                    Response.Redirect("~/Pages/Reservaciones/Error.aspx?msg=4");
+                                    Response.Redirect("~/Pages/Reservaciones/Error.aspx?msg=4", false);
                                 }
                             }
+
+                        }
+                        catch(Exception ex)
+                        {
+                            Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=10");
                         }
                     }
-                    else
-                    {
-                        // Si el usuario no es un empleado, redirige a la página "Mis Reservaciones"
-                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
-                    }
                 }
-                catch
+                else
                 {
-                    Response.Redirect("../Mensajes/Error.aspx?msg=0");
+                    // Si el usuario no es un empleado, redirige a la página "Mis Reservaciones"
+                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                 }
+
             }
             else
             {
                 Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
             }
         
-    }
+        }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -120,10 +123,10 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                 catch (Exception ex)
                 {
 
-                    Response.Redirect("../Mensajes/Error.aspx");
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=10");
                 }
                
-                    Response.Redirect("../Mensajes/Confirmacion.aspx");
+                    Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=4");
                 
 
             }
@@ -161,11 +164,11 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             catch (Exception ex)
             {
 
-                Response.Redirect("../Mensajes/Error.aspx?msg=0");
+                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=10");
             }
             finally
             {
-                Response.Redirect("../Mensajes/Confirmacion.aspx?msg=5");
+                Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=5");
             }
         }
     }

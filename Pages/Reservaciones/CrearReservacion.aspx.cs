@@ -171,13 +171,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 
                                     db.SpRegistrarBitacora(idUsuario, idReservacion, "CREADA");
 
-                                    Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=0");
+                                    Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=0", false);
 
                                 }
                                 else
                                 {
                                     //Error al obtener la habitación con la capacidad solicitada y menor reservaciones
-                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=8");
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=8", false);
                                 }
 
 
@@ -197,7 +197,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                         else
                         {
                             //Error no hay habitaciones activas
-                            Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=9");
+                            Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=9", false);
                         }
                     }
                 }

@@ -18,13 +18,15 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
         {
             if (Session["usuario"] != null)//Se valida la sesión
             {
-                try
+               
+                Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
+
+                int idPersona = objUsuario.idPersona;
+
+                if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
                 {
-                    Usuario objUsuario = (Usuario)Session["usuario"];//Se obtienen los datos de la sesión
 
-                    int idPersona = objUsuario.idPersona;
-
-                    if (objUsuario.esEmpleado)//Se comprueba si es un empleado o cliente
+                    try
                     {
                         if (!Page.IsPostBack)
                         {
@@ -53,17 +55,20 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 ddlPersona.DataBind();
                             }
                         }
+
                     }
-                    else//Si es cliente, redireciona a la página de mis reservaciones
+                    catch
                     {
-                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
+                        //Error al consultar la base de datos
+                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
                     }
+
                 }
-                catch
+                else//Si es cliente, redireciona a la página de mis reservaciones
                 {
-                    //Error al consultar la base de datos
-                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
+                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                 }
+               
             }
             else
             {

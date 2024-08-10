@@ -6,7 +6,7 @@
         <div class="container">
 
             <div class="mt-4 mb-4">
-                <h2>Detalle de Reservación</h2>
+                <h1>Detalle de Reservación</h1>
             </div>
 
 

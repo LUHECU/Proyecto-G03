@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="mt-4 mb-4">
-            <h2>Gestionar Reservaciones</h2>
+            <h1>Gestionar Reservaciones</h1>
         </div>
 
         <div class="row">

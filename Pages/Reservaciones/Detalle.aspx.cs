@@ -79,6 +79,9 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                     if (reservacion.Estado.ToString() == "A" && reservacion.FechaEntrada > DateTime.Now)
                                     {
                                         btnCancelarReserv.Visible = true;
+                                    }
+                                    if (reservacion.Estado.ToString() == "A" && reservacion.FechaSalida > DateTime.Now)
+                                    {
                                         btnEditarReserv.Visible = true;
                                     }
 
@@ -86,7 +89,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 else
                                 {
                                     //Error al consultar con el id
-                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1", false);
 
                                 }
                             }
@@ -131,7 +134,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 }
                                 else
                                 {
-                                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
+                                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx", false);
                                 }
                             }
                         }
@@ -201,16 +204,14 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 {
                     db.SpCancelarReservacion(idReserv, idPersona);
                 }
+                Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=2", false);
             }
             catch
             {
                 //Error al consultar la base de datos
                 Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
             }
-            finally 
-            {
-                Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=2");
-            }
+            
             
         }
 

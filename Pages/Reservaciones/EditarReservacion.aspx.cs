@@ -46,36 +46,43 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 //Se comprueba si los datos son nulos
                                 if (reservacion != null)
                                 {
-
-                                    //Se cargan los campos con la información obtenida
-
-                                    txtIdReservacion.Text = reservacion.IdReservacion.ToString();
-                                    txtHotel.Text = reservacion.NombreHotel.ToString();
-                                    txtIdHotel.Text = reservacion.IdHotel.ToString();
-                                    txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
-                                    txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
-                                    txtPersona.Text = reservacion.Cliente;
-                                    txtIdPersona.Text = reservacion.IdPersona.ToString();
-                                    txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
-                                    txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
-                                    txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
-                                    txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
-
-
-                                    DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
-
-                                    //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
-                                    if (fechaEntrada < DateTime.Now)
+                                    //Verifica el estado de la reservación
+                                    if (reservacion.Estado.ToString().Equals("A") && reservacion.FechaSalida > DateTime.Now)
                                     {
-                                        txtFechaEntrada.ReadOnly = true;
-                                    }
+                                        //Se cargan los campos con la información obtenida
 
+                                        txtIdReservacion.Text = reservacion.IdReservacion.ToString();
+                                        txtHotel.Text = reservacion.NombreHotel.ToString();
+                                        txtIdHotel.Text = reservacion.IdHotel.ToString();
+                                        txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
+                                        txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
+                                        txtPersona.Text = reservacion.Cliente;
+                                        txtIdPersona.Text = reservacion.IdPersona.ToString();
+                                        txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
+                                        txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
+                                        txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
+                                        txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
+
+
+                                        DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
+
+                                        //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
+                                        if (fechaEntrada < DateTime.Now)
+                                        {
+                                            txtFechaEntrada.ReadOnly = true;
+                                        }
+                                    }
+                                    else 
+                                    {
+                                        //Devuelve a la página principal en caso de que la reservación este inactiva
+                                        Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx", false);
+                                    }
 
                                 }
                                 else
                                 {
                                     //Error al consultar la base de datos por id
-                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1", false);
                                 }
                             }
                             else
@@ -88,35 +95,42 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 if (reservacion != null)
                                 {
 
-                                    //Se cargan los campos con la información obtenida
-
-                                    txtIdReservacion.Text = reservacion.IdReservacion.ToString();
-                                    txtHotel.Text = reservacion.NombreHotel.ToString();
-                                    txtIdHotel.Text = reservacion.IdHotel.ToString();
-                                    txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
-                                    txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
-                                    txtPersona.Text = reservacion.Cliente;
-                                    txtIdPersona.Text = reservacion.IdPersona.ToString();
-                                    txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
-                                    txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
-                                    txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
-                                    txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
-
-
-                                    DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
-
-                                    //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
-                                    if (fechaEntrada < DateTime.Now)
+                                    //Verifica el estado de la reservación
+                                    if (reservacion.Estado.ToString().Equals("A") && reservacion.FechaEntrada > DateTime.Now)
                                     {
-                                        txtFechaEntrada.ReadOnly = true;
+                                        //Se cargan los campos con la información obtenida
+
+                                        txtIdReservacion.Text = reservacion.IdReservacion.ToString();
+                                        txtHotel.Text = reservacion.NombreHotel.ToString();
+                                        txtIdHotel.Text = reservacion.IdHotel.ToString();
+                                        txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
+                                        txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
+                                        txtPersona.Text = reservacion.Cliente;
+                                        txtIdPersona.Text = reservacion.IdPersona.ToString();
+                                        txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
+                                        txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
+                                        txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
+                                        txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
+
+
+                                        DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
+
+                                        //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
+                                        if (fechaEntrada < DateTime.Now)
+                                        {
+                                            txtFechaEntrada.ReadOnly = true;
+                                        }
                                     }
-
-
+                                    else
+                                    {
+                                        //Devuelve a la página principal en caso de que la reservación este inactiva
+                                        Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx", false);
+                                    }
                                 }
                                 else
                                 {
                                     //Error al consultar la base de datos por id
-                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1", false);
                                 }
 
                             }
@@ -169,7 +183,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                         if (vefCapHabitacion != null)
                         {
                             db.SpEditarReservacion(idPersona, idUsuario, idReservacion, fechaEntrada, fechaSalida, numNinhos, numAdultos);
-                            Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=1");
+                            Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=1", false);
                         }
                         else
                         {

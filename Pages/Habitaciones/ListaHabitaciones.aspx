@@ -53,11 +53,9 @@
  
                         <asp:TemplateField>
                             <ItemTemplate>
-                        <%# Eval("estado").ToString() == "A" 
-                            ? $"<a href='EditarHabitacion.aspx?id={Eval("idHabitacion")}&idHotel={Eval("idHotel")}' class='btn btn-light btn-outline-secondary'>Modificar</a>"
-                            : "<a href='#' class='btn btn-secondary disabled'>Modificar</a>" %>
+                                <a href="EditarHabitacion.aspx?id=<%# Eval("idHabitacion")%>&idHotel=<%# Eval("idHotel")%>" class="btn btn-light btn-outline-secondary">Modificar</a>
 
-                        </ItemTemplate>
+                            </ItemTemplate>
 
                         </asp:TemplateField>
 

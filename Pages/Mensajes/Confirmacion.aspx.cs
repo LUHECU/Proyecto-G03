@@ -22,21 +22,27 @@ namespace ProyectoFinal_G03.Pages.Mensajes
             {
                 case 0:
                     lblMensaje.Text = "¡La creación de la reservación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    btnGestionarReserv.Visible = true;
                     break;
                 case 1:
                     lblMensaje.Text = "¡La edición de la reservación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    btnGestionarReserv.Visible = true;
                     break;
                 case 2:
                     lblMensaje.Text = "¡La cancelación de la reservación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    btnGestionarReserv.Visible = true;
                     break;
                 case 3:
                     lblMensaje.Text = "¡La creación de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    btnListaHab.Visible = true;
                     break;
                 case 4:
                     lblMensaje.Text = "¡La edición de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    btnListaHab.Visible = true;
                     break;
                 case 5:
                     lblMensaje.Text = "¡La inactivación de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
+                    btnListaHab.Visible = true;
                     break;
                 default:
                     Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx");
@@ -44,6 +50,16 @@ namespace ProyectoFinal_G03.Pages.Mensajes
 
             }
 
+        }
+
+        protected void btnGestionarReserv_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx");
+        }
+
+        protected void btnListaHab_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/Habitaciones/ListaHabitaciones.aspx");
         }
     }
 }

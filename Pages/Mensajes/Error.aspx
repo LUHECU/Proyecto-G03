@@ -12,8 +12,15 @@
         </div>
 
         <div class="mt-3">
-            <a class="btn btn-light btn-outline-secondary" href="../Reservaciones/GestionarReservaciones.aspx">Regresar</a>
+            <asp:Button ID="btnGestionarReserv" runat="server" Text="Regresar" CssClass="btn btn-light btn-outline-secondary" OnClick="btnGestionarReserv_Click" Visible="false"/>
         </div>
+
+        <div class="mt-3">
+            <asp:Button ID="btnListaHab" runat="server" Text="Regresar" CssClass="btn btn-light btn-outline-secondary" OnClick="btnListaHab_Click" Visible="false"/>
+        </div>
+
+        
+        
 
     </div>
 

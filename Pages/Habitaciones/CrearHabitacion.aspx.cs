@@ -22,13 +22,15 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
 
             if (Session["usuario"] != null) // Se valida la sesión
             {
-                try
+                
+                Usuario objUsuario = (Usuario)Session["usuario"]; // Se obtienen los datos de la sesión
+
+                int idPersona = objUsuario.idPersona;
+
+                if (objUsuario.esEmpleado) // Se comprueba si es un empleado
                 {
-                    Usuario objUsuario = (Usuario)Session["usuario"]; // Se obtienen los datos de la sesión
 
-                    int idPersona = objUsuario.idPersona;
-
-                    if (objUsuario.esEmpleado) // Se comprueba si es un empleado
+                    try
                     {
                         if (!Page.IsPostBack)
                         {
@@ -52,18 +54,18 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                             }
                            
                         }
-                        
                     }
-
-                    else // Si no es empleado
+                    catch
                     {
-                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx?msg=0");
+
                     }
                 }
-                catch
+
+                else // Si no es empleado
                 {
-                 
+                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx?msg=10");
                 }
+                
             }
             else
             {
@@ -74,7 +76,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
         
 
 
-            protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -113,11 +115,11 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             catch (Exception ex)
             {
 
-                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
+                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=10");
 
             }
 
-            Response.Redirect("~/Pages/Mensajes//Confirmacion.aspx?msg=3");
+            Response.Redirect("~/Pages/Mensajes/Confirmacion.aspx?msg=3");
         }
 
         

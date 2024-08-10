@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="mt-4 mb-4">
-            <h2>Mis Reservaciones</h2>
+            <h1>Mis Reservaciones</h1>
         </div>
    
         <div class="m my-3">
