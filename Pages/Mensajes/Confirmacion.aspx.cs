@@ -21,22 +21,22 @@ namespace ProyectoFinal_G03.Pages.Mensajes
             switch (msgCod) 
             {
                 case 0:
-                    lblMensaje.Text = "Ha registrado correctamente una nueva reservación";
+                    lblMensaje.Text = "¡La creación de la reservación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 case 1:
-                    lblMensaje.Text = "Ha modificado correctamente una reservación";
+                    lblMensaje.Text = "¡La edición de la reservación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 case 2:
-                    lblMensaje.Text = "Ha cancelado correctamente una reservación";
+                    lblMensaje.Text = "¡La cancelación de la reservación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 case 3:
-                    lblMensaje.Text = "Ha registrado correctamente una nueva habitación";
+                    lblMensaje.Text = "¡La creación de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 case 4:
-                    lblMensaje.Text = "Ha modificado correctamente una habitación";
+                    lblMensaje.Text = "¡La edición de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 case 5:
-                    lblMensaje.Text = "Ha cancelado correctamente una habitación";
+                    lblMensaje.Text = "¡La inactivación de la habitación se ha realizado con éxito! Los cambios han sido guardados correctamente.";
                     break;
                 default:
                     Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx");

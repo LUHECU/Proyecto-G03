@@ -74,10 +74,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         grdBitacora.DataSource = bitacora;
                                         grdBitacora.DataBind();
                                     }
-                                    else
-                                    {
-                                        //Error
-                                    }
+                                    
 
                                     if (reservacion.Estado.ToString() == "A" && reservacion.FechaEntrada > DateTime.Now)
                                     {
@@ -88,7 +85,9 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 }
                                 else
                                 {
-                                    //ERROR DE ID
+                                    //Error al consultar con el id
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
+
                                 }
                             }
                             else
@@ -122,10 +121,6 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                         grdBitacora.DataSource = bitacora;
                                         grdBitacora.DataBind();
                                     }
-                                    else
-                                    {
-                                        //Error ID
-                                    }
 
                                     if (reservacion.Estado.ToString() == "A" && reservacion.FechaEntrada > DateTime.Now)
                                     {
@@ -139,17 +134,13 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                     Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
                                 }
                             }
-
-
                         }
-
-
                     }
-
                 }
                 catch
                 {
-                    //ERROR
+                    //Error al consultar la base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
                 } 
 
 
@@ -213,7 +204,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             }
             catch
             {
-
+                //Error al consultar la base de datos
+                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
             }
             finally 
             {
