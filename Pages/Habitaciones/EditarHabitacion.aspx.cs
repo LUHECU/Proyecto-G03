@@ -43,7 +43,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                     // Verifica si la habitación está inactiva
                                     if (habitacion.Estado == 'I')
                                     {
-                                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=3");
                                     }
 
                                     // Verifica si tiene reservaciones activas
@@ -54,7 +54,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                     // Si existen reservaciones activas, redirige a la página de error
                                     if (reservaciones.Count > 0)
                                     { //mensaje estado
-                                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=2");
                                     }
                                     // Asigna los valores de la habitación a los controles de la página
                                     txtIdhotel.Text = habitacion.Nombre;
@@ -63,8 +63,8 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                                     txtDescripcion.Text = habitacion.Descripcion;
                                 }
                                 else
-                                {
-                                    Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
+                                { //id
+                                    Response.Redirect("~/Pages/Reservaciones/Eror.aspx?msg=4");
                                 }
                             }
                         }
@@ -77,7 +77,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                 }
                 catch
                 {
-                    Response.Redirect("../Mensajes/Error.aspx");
+                    Response.Redirect("../Mensajes/Error.aspx?msg=0");
                 }
             }
             else
@@ -100,10 +100,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     string descripcion = txtDescripcion.Text;
                     char estado = 'A';
 
-                    if (!string.IsNullOrEmpty(numeroHabitacion) &&
-                        !string.IsNullOrEmpty(descripcion) &&
-                        capacidadMaxima > 0)
-                    {
+                   
 
 
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
@@ -111,18 +108,13 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                             // Si no existe, procede a actualizar la habitación
                             db.SpEditarHabitacion(id, idHotel, numeroHabitacion, capacidadMaxima, descripcion, estado);
                         }
-                       
-                    }
-                    else
-                    {
-                        //Campos vacios
-                        Response.Redirect("../Mensajes/Error.aspx");
-                    }
+                                        
+                    
                 }
                 catch (SqlException ex)
                 {
                     //campos duplicados
-                    Response.Redirect("~/Pages/Mensajes/error.aspx");
+                    Response.Redirect("~/Pages/Mensajes/error.aspx?msg=7");
 
                 }
                 catch (Exception ex)
@@ -154,11 +146,12 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
             }
             catch (Exception ex)
             {
-                Response.Redirect("../Mensajes/Error.aspx");
+
+                Response.Redirect("../Mensajes/Error.aspx?msg=0");
             }
             finally
             {
-                Response.Redirect("../Mensajes/Confirmacion.aspx");
+                Response.Redirect("../Mensajes/Confirmacion.aspx?msg=5");
             }
         }
     }

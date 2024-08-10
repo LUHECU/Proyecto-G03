@@ -55,9 +55,9 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                         
                     }
 
-                    else // Si no es empleado,
+                    else // Si no es empleado
                     {
-                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx");
+                        Response.Redirect("~/Pages/Reservaciones/MisReservaciones.aspx?msg=0");
                     }
                 }
                 catch
@@ -91,11 +91,7 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                     char estado = 'A'; 
                     int idHotel = int.Parse(id);
 
-                    // Verificar que todos los campos de la habitación están completos
-                    if (!string.IsNullOrEmpty(numeroHabitacion) &&
-                        !string.IsNullOrEmpty(descripcion) &&
-                        !string.IsNullOrEmpty(txtCapacidadMaxima.Text))
-                    {
+                   
                      
                         // Guardar la habitación en la base de datos
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
@@ -105,27 +101,23 @@ namespace ProyectoFinal_G03.Pages.Habitaciones
                         }
 
                     }
-                    else
-                    {
-                        // Redirige a la página de error si hay campos vacíos
-                        Response.Redirect("~/Pages/Mensajes/Error.aspx");
-                    }
-                }
+                  
+                
             }
             catch (SqlException ex)
             {
                //Mensaje para datos duplicados
-                    Response.Redirect("~/Pages/Mensajes/error.aspx");
+                    Response.Redirect("~/Pages/Mensajes/error.aspx?msg=7");
               
             }
             catch (Exception ex)
             {
 
-                Response.Redirect("~/Pages/Mensajes/Error.aspx");
+                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
 
             }
 
-            Response.Redirect("~/Pages/Mensajes//Confirmacion.aspx");
+            Response.Redirect("~/Pages/Mensajes//Confirmacion.aspx?msg=3");
         }
     }
 }
