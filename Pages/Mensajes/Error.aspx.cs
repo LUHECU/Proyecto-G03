@@ -30,10 +30,10 @@ namespace ProyectoFinal_G03.Pages.Mensajes
                     lblMensajeError.Text = "La habitación no puede ser modificada debido a que existen reservaciones “En proceso” o “En espera” asociadas a la habitación";
                     break;
                 case 3:
-                    lblMensajeError.Text = "";
+                    lblMensajeError.Text = "La habitación que intentas editar está inactiva. Por favor, selecciona una habitación activa para continuar.";
                     break;
                 case 4:
-                    lblMensajeError.Text = "";
+                    lblMensajeError.Text = "La habitación que estás intentando editar no existe. Por favor, verifica el ID y vuelve a intentarlo.";
                     break;
                 case 5:
                     lblMensajeError.Text = "";
