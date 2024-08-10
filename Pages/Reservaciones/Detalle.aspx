@@ -167,7 +167,7 @@
                  <div class="card text-center position-fixed" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Alerta</h5>
-                        <p class="card-text ">¿Desea confirmar la cancelación la reservación?</p>
+                        <p class="card-text ">¿Desea confirmar la cancelación de la reservación?</p>
                         <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar" CssClass="card-link btn btn-danger" OnClick="btnConfirmar_Click"/>
                         <asp:Button ID="btnNoConfirmar" runat="server" Text="Regresar"  CssClass="card-link btn btn-light btn-outline-secondary" OnClick="btnNoConfirmar_Click"/>
                     </div>
