@@ -34,6 +34,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
 
                             using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))//Se utiliza la conexión para asociar la base de datos
                             {
+
                                 //Se obtienen los datos para cargar el gridview
                                 var misReserv = db.SpConsultarReservacionesExcluyendoIdPersona(idPersona);
 
@@ -60,7 +61,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 }
                 catch
                 {
-
+                    //Error al consultar la base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
                 }
             }
             else
@@ -130,8 +132,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
             }
             catch
             {
-
-
+                //Error al consultar la base de datos
+                Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
             }
         }
 

@@ -21,13 +21,13 @@ namespace ProyectoFinal_G03.Pages.Mensajes
             switch (msgCod)
             {
                 case 0:
-                    lblMensajeError.Text = "";
+                    lblMensajeError.Text = "Ha surgido un error al consultar la base de datos";
                     break;
                 case 1:
-                    lblMensajeError.Text = "";
+                    lblMensajeError.Text = "Ha surgido un error al consultar la reservación seleccionada";
                     break;
                 case 2:
-                    lblMensajeError.Text = "";
+                    lblMensajeError.Text = "La habitación no puede ser modificada debido a que existen reservaciones “En proceso” o “En espera” asociadas a la habitación";
                     break;
                 case 3:
                     lblMensajeError.Text = "";

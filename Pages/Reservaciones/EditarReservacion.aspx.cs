@@ -26,44 +26,100 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                     //Se obtiene el id de la reservación a editar
                     int idReserv = int.Parse(Request.QueryString["id"]);
 
+                    //Se obtiene el id del usuario y el cargo
+                    Usuario objUsuario = (Usuario)Session["usuario"];
+                    int idUsuario = objUsuario.idPersona;
+                    bool esEmpleado = objUsuario.esEmpleado;
+
                     if (!Page.IsPostBack)
                     {
 
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB(new DataOptions().UseSqlServer(conn)))
                         {
-                            //Se obtienen los datos de la reservación seleccionada
-                            var reservacion = db.SpCosultarReservacionesPorId(idReserv).FirstOrDefault();
 
-                            //Se comprueba si los datos son nulos
-                            if (reservacion != null)
+                            //Se verifica el empleado
+                            if (esEmpleado)
+                            {
+                                //Se obtienen los datos de la reservación seleccionada
+                                var reservacion = db.SpCosultarReservacionesPorId(idReserv).FirstOrDefault();
+
+                                //Se comprueba si los datos son nulos
+                                if (reservacion != null)
+                                {
+
+                                    //Se cargan los campos con la información obtenida
+
+                                    txtIdReservacion.Text = reservacion.IdReservacion.ToString();
+                                    txtHotel.Text = reservacion.NombreHotel.ToString();
+                                    txtIdHotel.Text = reservacion.IdHotel.ToString();
+                                    txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
+                                    txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
+                                    txtPersona.Text = reservacion.Cliente;
+                                    txtIdPersona.Text = reservacion.IdPersona.ToString();
+                                    txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
+                                    txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
+                                    txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
+                                    txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
+
+
+                                    DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
+
+                                    //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
+                                    if (fechaEntrada < DateTime.Now)
+                                    {
+                                        txtFechaEntrada.ReadOnly = true;
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    //Error al consultar la base de datos
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
+                                }
+                            }
+                            else
                             {
 
-                                //Se cargan los campos con la información obtenida
-                            
-                                txtIdReservacion.Text = reservacion.IdReservacion.ToString();
-                                txtHotel.Text = reservacion.NombreHotel.ToString();
-                                txtIdHotel.Text = reservacion.IdHotel.ToString();   
-                                txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
-                                txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
-                                txtPersona.Text = reservacion.Cliente;
-                                txtIdPersona.Text = reservacion.IdPersona.ToString();
-                                txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
-                                txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
-                                txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
-                                txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
+                                //Se obtienen los datos de la reservación seleccionada
+                                var reservacion = db.SpCosultarReservacionesPorIdIdCliente(idReserv, idUsuario).FirstOrDefault();
 
-                                
-                                DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
+                                //Se comprueba si los datos son nulos
+                                if (reservacion != null)
+                                {
 
-                                //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
-                                if (fechaEntrada < DateTime.Now)
-                                { 
-                                    txtFechaEntrada.ReadOnly = true;
+                                    //Se cargan los campos con la información obtenida
+
+                                    txtIdReservacion.Text = reservacion.IdReservacion.ToString();
+                                    txtHotel.Text = reservacion.NombreHotel.ToString();
+                                    txtIdHotel.Text = reservacion.IdHotel.ToString();
+                                    txtNumHabitacion.Text = reservacion.NumeroHabitacion.ToString();
+                                    txtIdHabitacion.Text = reservacion.IdHabitacion.ToString();
+                                    txtPersona.Text = reservacion.Cliente;
+                                    txtIdPersona.Text = reservacion.IdPersona.ToString();
+                                    txtFechaEntrada.Text = reservacion.FechaEntrada.ToString("yyyy-MM-dd");
+                                    txtFechaSalida.Text = reservacion.FechaSalida.ToString("yyyy-MM-dd");
+                                    txtNumNinhos.Text = reservacion.NumeroNinhos.ToString();
+                                    txtNumAdultos.Text = reservacion.NumeroAdultos.ToString();
+
+
+                                    DateTime fechaEntrada = reservacion.FechaEntrada;//Obtiene la fecha de entrada de la reservacion y la asigana a un campo
+
+                                    //Vefica la fecha de entrada y en caso de que sea menor a la actual, desabilita la opcion para poder editar esta misma
+                                    if (fechaEntrada < DateTime.Now)
+                                    {
+                                        txtFechaEntrada.ReadOnly = true;
+                                    }
+
+
                                 }
-                            
+                                else
+                                {
+                                    //Error al consultar la base de datos
+                                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=1");
+                                }
 
                             }
-
 
                         }
 
@@ -72,7 +128,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                 }
                 catch
                 {
-
+                    //Error al consultar la base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
                 }
 
 
@@ -128,8 +185,9 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                     }
                 }
                 catch 
-                { 
-                    //ERROR
+                {
+                    //Error al consultar la base de datos
+                    Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
                 }
             }
         }

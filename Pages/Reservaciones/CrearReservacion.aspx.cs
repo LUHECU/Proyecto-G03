@@ -71,7 +71,8 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                     }
                     catch 
                     {
-                        //ERROR
+                        //Error al consultar la base de datos
+                        Response.Redirect("~/Pages/Mensajes/Error.aspx?msg=0");
                     }
                 }
 
