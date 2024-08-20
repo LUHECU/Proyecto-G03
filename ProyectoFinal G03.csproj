@@ -263,6 +263,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\Logo6.png" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="Pages\Habitaciones\CrearHabitacion.aspx" />
     <Content Include="Pages\Habitaciones\EditarHabitacion.aspx" />

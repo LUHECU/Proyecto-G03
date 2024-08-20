@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoFinal_G03.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,13 @@ namespace ProyectoFinal_G03
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Se verifica si se ha iniciado una sesión
+            if (Session["usuario"] == null)
+            {
 
+                Response.Redirect("~/Pages/InicioSesion/Inicio.aspx");
+
+            }
         }
     }
 }

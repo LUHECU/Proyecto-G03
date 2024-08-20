@@ -26,6 +26,8 @@ namespace ProyectoFinal_G03
                     lblNombreCompleto.Visible = true;
                     btnCerrarSesion.Visible = true;
 
+                    phNav.Visible = true;
+
                 }
                 catch 
                 {

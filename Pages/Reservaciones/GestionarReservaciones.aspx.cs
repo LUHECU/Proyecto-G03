@@ -45,7 +45,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                                 grdGestReserv.DataBind();
 
                                 //Se obtienen los datos para cargar el dropdownlist
-                                var query = db.SpConsultarPersonas().Select(per => new ListItem(per.NombreCompleto, per.IdPersona.ToString()));
+                                var query = db.SpConsultarPersonasExcluyendoId(idPersona).Select(per => new ListItem(per.NombreCompleto, per.IdPersona.ToString()));
                                 listaPersonas.AddRange(query);
 
                                 //Se cargan los datos en el dropdownlist

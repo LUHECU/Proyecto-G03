@@ -17,6 +17,13 @@ namespace ProyectoFinal_G03.Pages.InicioSesion
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            if (Session["usuario"] != null)
+            {
+                Response.Redirect("~/Pages/Reservaciones/GestionarReservaciones.aspx");
+            }
+
+            
         }
 
         protected void btnInicioSesion_Click(object sender, EventArgs e)

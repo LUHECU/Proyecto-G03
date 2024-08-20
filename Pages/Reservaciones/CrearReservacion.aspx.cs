@@ -40,7 +40,7 @@ namespace ProyectoFinal_G03.Pages.Reservaciones
                         {
 
                             //Se obtienen los datos para cargar el dropdownlist personas
-                            var queryPersonas = db.SpConsultarPersonas().Select(per => new ListItem(per.NombreCompleto, per.IdPersona.ToString()));
+                            var queryPersonas = db.SpConsultarPersonasActivas().Select(per => new ListItem(per.NombreCompleto, per.IdPersona.ToString()));
                             listaPersonas.AddRange(queryPersonas);
 
                             //Se cargan los datos en el dropdownlist personas
